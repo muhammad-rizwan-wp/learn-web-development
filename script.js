@@ -11,11 +11,11 @@ document.title = "My Page";
 document.body.style.backgroundColor = "lightblue";
 
 /**
- * What is FUNCTION?
- * Functions are as action words
- * It would be a verb
- * Inside the parenthesis we can pass the data to perform the action
- * The data techinincal name is arguments
+* What is a FUNCTION?
+* A function is a reusable block of code that performs a specific task.
+* Functions are like action words (verbs).
+* Inside the parentheses, we define PARAMETERS (placeholders for data).
+* When we call the function, we pass ARGUMENTS (actual values).
  */
 
 /* CREATION */
