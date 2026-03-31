@@ -32,8 +32,8 @@ function sqare(num) {
 }
 /* INVOKATION */
 // greet();
-greeting("Muhammad Rizwan", "Asslamualikum");
-alert(sqare(10));
+//greeting("Muhammad Rizwan", "Asslamualikum");
+// alert(sqare(10));
 /*----------------------------------------------- END -----------------------------------------------------*/
 
 /*---------------------------------------------- START ----------------------------------------------------*/
@@ -63,8 +63,8 @@ let cat = {
     leastFavorite: "Banana",
   },
 };
-cat.meow();
-cat.food.favorite;
+//cat.meow();
+//cat.food.favorite;
 /*----------------------------------------------- END -----------------------------------------------------*/
 
 /*---------------------------------------------- START ----------------------------------------------------*/
@@ -104,7 +104,7 @@ let faimlyTree = [
 ];
 myWords.push("React");
 myFavNo.pop();
-console.log(myFavNo[1]);
+// console.log(myFavNo[1]);
 /*----------------------------------------------- END -----------------------------------------------------*/
 
 /*---------------------------------------------- START ----------------------------------------------------*/
@@ -114,7 +114,7 @@ console.log(myFavNo[1]);
  * */
 
 let checkAge = 20;
-
+/*
 if (checkAge >= 18) {
   console.log("Your're eligible for VOTE");
 } else {
@@ -127,6 +127,7 @@ while (count <= 20) {
   console.log("There're " + count + " counts.");
   count++;
 }
+*/
 /*----------------------------------------------- END -----------------------------------------------------*/
 
 /*---------------------------------------------- START ----------------------------------------------------*/
@@ -166,11 +167,11 @@ function createMultiplier(multiplier) {
 let doubleMe = createMultiplier(2);
 let trippleMe = createMultiplier(3);
 let quadrupleMe = createMultiplier(4);
-
+/*
 console.log(doubleMe(10));
 console.log(trippleMe(10));
 console.log(quadrupleMe(10));
-
+*/
 /*----------------------------------------------- END -----------------------------------------------------*/
 
 /*---------------------------------------------- START ----------------------------------------------------*/
@@ -211,7 +212,7 @@ function nameOnlyFunc(item) {
   return item.name;
 }
 
-console.log(nameList);
+// console.log(nameList);
 
 let dogList = pets.filter(onlyDogsFunc);
 
@@ -219,6 +220,148 @@ function onlyDogsFunc(item) {
   return item.species == "Dog";
 }
 
-console.log(dogList);
+// console.log(dogList);
+
+/*----------------------------------------------- END -----------------------------------------------------*/
+
+/*---------------------------------------------- START ----------------------------------------------------*/
+/* ===> Day 8 <=== */
+/**
+ * Variable Scope & Context / this keyword
+ * Scope is the biggest source of confusion regarding variables
+ * Context is the biggest source of confusion regarding objects
+ * Let keyword uses BLOCK-SCOPE
+ * Var Keyword uses FUNCTION-SCOPE (Very less used currently because of it scope)
+ */
+
+/**>>> SCOPE <<<**/
+
+function myFunc() {
+  let myName = "Muhammad Rizwan";
+}
+
+// myFunc();
+// console.log(myName);
+
+let myName2 = "Muhammad Rizwan I";
+
+function myNameF() {
+  myName2 = "Muhammad Rizwan II";
+  if (2 + 2 == 4) {
+    let myName2 = "Muhammad Rizwan III";
+    console.log("Inside If Block:-" + myName2);
+  }
+  console.log("Inside Function:-" + myName2);
+}
+
+// console.log("Global Scope:-" + myName2);
+// myNameF();
+
+/**>>> CONTEXT <<<**/
+/**
+ * Inside object we passed value it own function so we usee the THIS keyword
+ * THIS keyword pointing enclosing object
+ * The THIS keyword points towards the object that is executing the current function
+ *  */
+
+let john = {
+  firstName: "John",
+  lastName: "Doe",
+  driveCar() {
+    function iAmFunction() {
+      console.log(this); // It return WINDOW object of JS not our john object
+    }
+    iAmFunction();
+    console.log(this.firstName + " " + this.lastName + " is driving a car");
+  },
+};
+// john.driveCar();
+
+function singASong() {
+  console.log(this.firstName + " " + this.lastName + " is singing a song");
+}
+
+// singASong.call(john);
+/*----------------------------------------------- END -----------------------------------------------------*/
+
+/*---------------------------------------------- START ----------------------------------------------------*/
+/* ===> Day 9 <=== */
+/* Misc: Must We Know Them */
+
+let myNum = [10, 100, 1000, 10000];
+
+/**>>> Anonymous Function <<<**/
+// document.addEventListener("click", function () {
+//   console.log("Anonymous Function Clicked ✅");
+// });
+
+let doubleMeAnn = myNum.map(function (item) {
+  return item * 2;
+});
+
+// console.log("DoubleMe using Anonymous: " + doubleMeAnn);
+
+/**>>> Arrow Function <<<**/
+// document.addEventListener("click", () => {
+//   console.log("Arrow Function Clicked ✅");
+// });
+
+let doubleMeArr = myNum.map((item) => item * 2);
+
+// console.log("DoubleMe using Arrow: " + doubleMeArr);
+
+let john2 = {
+  firstName: "Muhammad",
+  lastName: "Rizwan",
+  driveCar() {
+    let iAmFunction = () => console.log(this);
+    iAmFunction();
+    console.log(this.firstName + " " + this.lastName + " is driving a car");
+  },
+};
+// john2.driveCar();
+
+/**>>> Function Hoisting <<<**/
+
+// console.log(countDigit);
+let countDigit = 20;
+
+/** Only functiuon declerative is HOISTED */
+// cool();
+function cool() {
+  console.log("This is super coooooool");
+}
+
+/**>>> Template Literals <<<**/
+let petName = "DoggyDe";
+/*
+console.log("Hey, my pet name is " + petName + ".");
+console.log(`Hey, my pet name is ${petName}.`);
+*/
+/*----------------------------------------------- END -----------------------------------------------------*/
+
+/*---------------------------------------------- START ----------------------------------------------------*/
+/* ===> Day 10 <=== */
+/**---> WEB BROWSER PRACTICE <---**/
+
+let todoForm = document.getElementById("todo-form");
+let inputTodoForm = document.querySelector("#todo-form input");
+let todoList = document.getElementById("todo-list");
+
+todoForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+  createItem(inputTodoForm);
+});
+
+function createItem(item) {
+  let htmlTemplate = `<li class="mb-3">${item.value} <button onclick="handleDelete(this)" class="bg-red-500 text-white px-2 py-1 rounded text-sm">Delete</button></li>`;
+  todoList.insertAdjacentHTML("beforeend", htmlTemplate);
+  inputTodoForm.value = "";
+  inputTodoForm.focus();
+}
+
+function handleDelete(element) {
+  element.parentElement.remove();
+}
 
 /*----------------------------------------------- END -----------------------------------------------------*/
