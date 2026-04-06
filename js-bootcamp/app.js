@@ -558,3 +558,467 @@ console.log(
 );
 */
 
+/********************************** - End - **********************************/
+
+/* >>> Array <<< */
+
+/********************************************************************
+ * An Array is a special type of object used to store multiple values in a single variable.
+ * ➤ Key Features:
+ * - Can store multiple values (of same or different data types)
+ * - Ordered collection (maintains insertion order)
+ * - Indexed (starts from 0)
+ * - Dynamic / resizable (size can change at runtime)
+ * - Zero-based indexing (first element at index 0)
+ * ➤ Data Types:
+ * - Can store primitive values (number, string, boolean, etc.)
+ * - Can also store objects, functions, or even other arrays (nested arrays)
+ * ➤ Copy Behavior:
+ * - Arrays are reference types
+ * - Copying creates a shallow copy (not deep copy)
+ * ➤ Common Array Methods:
+ * 🔹 Adding / Removing Elements:
+ * - push()       → add element(s) to the end
+ * - pop()        → remove last element
+ * - unshift()    → add element(s) to the beginning
+ * - shift()      → remove first element
+ * 🔹 Searching:
+ * - includes()   → checks if value exists (true/false)
+ * - indexOf()    → returns index of element (-1 if not found)
+ * - lastIndexOf()→ returns last occurrence index
+ * - find()       → returns first matching element
+ * - findIndex()  → returns index of first match
+ * 🔹 Transformation:
+ * - map()        → creates new array by transforming elements
+ * - filter()     → returns elements that match condition
+ * - reduce()     → reduces array to a single value
+ * 🔹 Iteration:
+ * - forEach()    → executes function on each element
+ * 🔹 Slicing / Modifying:
+ * - slice()      → returns a shallow copy of portion (non-destructive)
+ * - splice()     → adds/removes elements (modifies original array)
+ * 🔹 Conversion:
+ * - join()       → converts array to string
+ * - toString()   → converts array to string
+ * - Array.from() → creates array from iterable
+ * 🔹 Combining / Checking:
+ * - concat()     → merges arrays
+ * - Array.isArray() → checks if value is an array
+ * 🔹 Sorting / Reversing:
+ * - sort()       → sorts elements (by default as strings)
+ * - reverse()    → reverses array
+ * ➤ Spread & Rest:
+ * - Spread (...) → expands elements (useful for copying/merging)
+ * - Rest (...)   → collects multiple elements into an array
+ * ➤ Important Notes:
+ * - Arrays are mutable (can be changed after creation)
+ * - Length property gives total number of elements
+ * - Sparse arrays can exist (missing indexes)
+ *
+ ********************************************************************/
+
+const myArr = [0, 1, 2, 3, 4];
+const myArr2 = new Array(0, 1, 2, 3, 4);
+// console.log(myArr[0]);
+
+/*>>> ARRAY METHODS <<<*/
+/*
+myArr.push(6);
+myArr.pop()
+myArr.unshift(9)
+myArr.shift()
+console.log(myArr.includes(9));
+console.log(myArr.indexOf(9));
+const newArr = myArr.join()
+console.log(newArr);
+console.log(`Slice: ${myArr.slice(1, 3)}`);
+console.log(`Splice: ${myArr.splice(1, 3)}`);
+console.log(myArr);
+*/
+
+const marvel_heros = ["Thor", "Ironman", "Spiderman"];
+const dc_heros = ["Superman", "Flash", "Batman"];
+
+/*
+marvel_heros.push(dc_heros);
+console.log(marvel_heros);
+const all_heros = marvel_heros.concat(dc_heros);
+console.log(all_heros);
+const all_heros = [...marvel_heros, ...dc_heros];
+console.log(all_heros);
+const multi_arr = [0, 1, 2, [3, 4, 5], 6, 7, [8, 9, 10, [21, 22, 23]]];
+const single_muti_arr = multi_arr.flat(Infinity);
+console.log(single_muti_arr);
+console.log(Array.isArray("Muhammad"));
+console.log(Array.from("Muhammad"));
+console.log(Array.from({ name: "Muhammad" }));
+*/
+
+/********************************** - End - **********************************/
+
+/* >>> Object <<< */
+
+/********************************************************************
+ * An Object is a collection of data stored in key-value pairs.
+ * Ways to Create Objects:
+ * - Object Literal (most common): const obj = {}
+ * - Constructor (Singleton-like instance):  const obj = new Object()
+ * NOTE:
+ * - Literal creates separate instances
+ * - Constructor can be used to create a single object instance
+ * Key Features:
+ * - Stores data as key-value pairs
+ * - Keys are strings (or Symbols)
+ * - Values can be any data type (primitive, array, function, object)
+ * - Objects are mutable (can be modified after creation)
+ * Accessing Values:
+ * - Dot notation: obj.name
+ * - Bracket notation: obj["name"] // Useful when key has spaces or is dynamic
+ * Common Object Methods:
+ * Static Methods (Object):
+ * - Object.assign()    → copies properties (shallow copy)
+ * - Object.keys()      → returns array of keys
+ * - Object.values()    → returns array of values
+ * - Object.entries()   → returns array of [key, value] pairs
+ * - Object.freeze()    → prevents modification
+ * - Object.seal()      → allows modification but no add/remove
+ * - Object.hasOwn()    → checks if key exists
+ * Instance Methods:
+ * - hasOwnProperty()   → checks own property
+ * - toString()         → converts object to string
+ * Iteration:
+ * - for...in loop      → iterates over keys
+ * - Object.keys().forEach() → iterate keys
+ * Copy Behavior:
+ * - Objects are reference types
+ * - Copying creates a shallow copy
+ * Nested Objects:
+ * - Objects can contain other objects // obj.user.name
+ * Destructuring:
+ * - Extract values easily: const { name, age } = obj
+ * Spread Operator:
+ * - Copy / merge objects: const newObj = { ...obj }
+ * Optional Chaining:
+ * - Safe access:   → obj?.user?.name
+ * ➤ Important Notes:
+ * - Order of keys is generally preserved (ES6+)
+ * - Functions inside objects are called methods
+ *
+ ********************************************************************/
+
+const lastDayLoggin = Symbol("lastDayLoggin");
+/* >>> Object Literals  */
+const JsUser = {
+  name: "Muhammad",
+  age: 18,
+  location: "PECHS Block 6, Karachi",
+  email: "muhammad@user.com",
+  isLoggedIn: false,
+  [lastDayLoggin]: ["Monday", "Sunday"],
+};
+
+/*
+console.log(JsUser["email"]);
+Object.freeze(JsUser);
+JsUser.email = "muhammad@proton.com";
+console.log(JsUser);
+JsUser.greeting = function () {
+  console.log(`Welcome to JsUser, ${this.name}`);
+};
+console.log(JsUser.greeting());
+*/
+
+/* >>> Singleton  */
+
+const tinderUser = new Object();
+tinderUser.id = "TU0001";
+tinderUser.name = "Muhammad";
+tinderUser.isLoggIn = false;
+
+// console.log(tinderUser);
+
+const objA = { 1: "0", 2: "A", 3: "B" };
+const objB = { 4: "a", 5: "b", 6: "c" };
+
+// const objC = Object.assign(objA, objB);
+const objC = Object.assign({}, objA, objB);
+// console.log(objC);
+
+const users = [
+  {
+    id: 1,
+    email: "user1@users.com",
+  },
+  {
+    id: 2,
+    email: "user2@users.com",
+  },
+  {
+    id: 3,
+    email: "user3@users.com",
+  },
+  {
+    id: 4,
+    email: "user4@users.com",
+  },
+  {
+    id: 5,
+    email: "user5@users.com",
+  },
+];
+
+/*
+console.log(Object.keys(tinderUser));
+console.log(Object.values(tinderUser));
+console.log(Object.entries(tinderUser));
+console.log(tinderUser.hasOwnProperty('name'));
+*/
+
+const course = {
+  title: "JavaScript",
+  price: 999,
+  instructor: "Abu Bakr",
+};
+
+const { title, price, instructor } = course;
+// console.log(title);
+
+/********************************** - End - **********************************/
+
+/* >>> Function <<< */
+
+/********************************************************************
+ * A function is used to group code into a reusable block.
+ * It allows you to execute the same logic multiple times without rewriting it.
+ * In a function definition, we declare variables known as PARAMETERS.
+ * These act as placeholders for the values the function will receive.
+ * When a function is called, the actual values passed are called ARGUMENTS.
+ * The `return` statement is used to send a value back from the function.
+ * Once a `return` statement is executed, the function stops running immediately.
+ * The REST OPERATOR (...args) allows a function to accept an unlimited number of arguments.
+ * It collects all remaining arguments into a single array.
+ * This is useful when you don't know how many inputs will be passed.
+ * Functions can be:
+ * - Named or anonymous
+ * - Arrow functions (shorter syntax)
+ * - Stored in variables, passed as arguments, or returned from other functions
+ * Functions help improve code readability, reusability, and maintainability.
+ *
+ *********************************************************************/
+
+// function addTwoDigits(num1, num2) {
+//   console.log(num1 + num2);
+// }
+
+function addTwoDigits(num1, num2) {
+  return num1 + num2;
+}
+// const result = addTwoDigits(10, 12);
+// console.log(`Result: ${result}`);
+
+function calculateCartPrice(...num) {
+  return num;
+}
+
+// console.log(calculateCartPrice(500, 600, 700, 800));
+
+const user = {
+  username: "Muhammad Rizwan",
+  email: "muhammad@users.com",
+};
+
+function handleObject(obj) {
+  console.log(`Username is ${obj.username} and email is ${obj.email}`);
+}
+// handleObject(user);
+
+/********************************** - End - **********************************/
+
+/* >>> Global & Local Scope <<< */
+
+/********************************************************************
+ * Scope defines where variables are accessible in your code.
+ * GLOBAL SCOPE:
+ * Variables declared outside of any block or function.
+ * These can be accessed from anywhere in the program.
+ * LOCAL (BLOCK) SCOPE:
+ * Variables declared inside a block (curly braces `{}`),
+ * such as in functions, if-else statements, loops, etc.
+ * These are only accessible within that block.
+ * Note:
+ * Curly braces `{}` define a block scope in control structures and functions. However, in objects, `{}` are used to define structure, not scope.
+ * var:
+ * - NOT block-scoped (it is function-scoped).
+ * - Can be accessed outside block statements like if/for.
+ * - Can lead to unexpected behavior due to hoisting and scope leakage.
+ * let & const:
+ * - ARE block-scoped.
+ * - Cannot be accessed outside their block.
+ * - Accessing them before declaration results in a ReferenceError (due to the Temporal Dead Zone).
+ * Best Practice:
+ * - Prefer `let` and `const` over `var`.
+ * - Use `const` by default, and `let` when reassignment is needed.
+ * Environment Difference:
+ * - In browsers, global variables are attached to the `window` object.
+ * - In Node.js, global variables are attached to the `global` object.
+ * - So, global scope behaves slightly differently depending on the environment.
+ *
+ *********************************************************************/
+
+let a = 50;
+
+if (true) {
+  let a = 10;
+  const b = 20;
+  var c = 30;
+}
+
+// console.log(a); // ReferenceError: a is not defined
+// console.log(b); // ReferenceError: b is not defined
+// console.log(c); // 30 [It return value out of curly braces]
+// console.log(a);
+
+/********************************** - End - **********************************/
+
+/* >>> Scope Level & Mini Hoisting <<< */
+
+/********************************************************************
+ * NESTED SCOPE: When functions or blocks are nested inside each other:
+ * - A child (inner) function CAN access variables from its parent.
+ *   This is called lexical scope (or closure behavior).
+ * - A parent (outer) function CANNOT access variables declared inside its child function.
+ *
+ * Example:
+ * function parent() { let a = 10;
+ * function child() {   let b = 20;
+ *     console.log(a); // Accessible (parent → child)
+ *   }
+ *   // console.log(b); // ❌ Error (child → parent not allowed)
+ * }
+ *
+ * The same rule applies to nested blocks like if-else statements.
+ *
+ * ---------------------------------------------------------------
+ * MINI HOISTING (Function behavior):
+ * Function Declaration: Can be used BEFORE it is defined.
+ * - Fully hoisted with its definition.
+ * sayHello(); // ✅ Works
+ * function sayHello() {
+ *   return "Hello";
+ * }
+ *
+ * Function Expression (assigned to a variable): NOT fully hoisted.
+ * - Only the variable is hoisted (depending on var/let/const), but not the function itself.
+ * greet(); // ❌ Error
+ * const greet = function () {
+ *   return "Hi";
+ * };
+ * - With `let` and `const`, accessing before initialization causes a ReferenceError (Temporal Dead Zone).
+ * Key Takeaways:
+ * - Inner scope can access outer scope, but not vice versa.
+ * - Function declarations are hoisted completely.
+ * - Function expressions are NOT hoisted the same way.
+ *
+ *********************************************************************/
+
+function outer() {
+  const username = "Muhammad";
+  function inner() {
+    const email = "innner@users.com";
+    console.log(username);
+  }
+  // console.log(email); // ReferenceError: email is not defined
+  inner();
+}
+
+// outer();
+
+if (true) {
+  const username = "Muhammad Rizwan";
+  if (username === "Muhammad Rizwan") {
+    const userEmail = "muhammad@users.com";
+    // console.log("Inner If: ", username);
+  }
+  // console.log(userEmail); // ReferenceError: userEmail is not defined
+}
+
+//console.log(username); // ReferenceError: username is not defined
+
+// console.log(addOne(5));
+function addOne(num) {
+  return num + 1;
+}
+// console.log(addTwo(5)); // ReferenceError: Cannot access 'addTwo' before initialization
+const addTwo = function (num) {
+  return num + 2;
+};
+
+/********************************** - End - **********************************/
+
+/* >>> THIS & Arrow Function <<< */
+
+/********************************************************************
+ * The `this` keyword refers to the current execution context.
+ * Its value depends on HOW a function is called, not where it is defined.
+ * GLOBAL CONTEXT: In browsers (DOM): `this` refers to the `window` object.
+ * In Node.js: `this` refers to an empty object `{}` in modules.
+ * INSIDE OBJECT METHODS: `this` refers to the object that is calling the method.
+ * Example: const user = {
+ *   name: "Ali",
+ *   greet() {
+ *     console.log(this.name); // "Ali"   } };
+ * 
+ * ARROW FUNCTIONS (ES6): Introduced in ES6 (ECMAScript 2015).
+ * - Shorter syntax compared to regular functions.
+ * - DO NOT have their own `this`.
+ * Instead: Arrow functions inherit `this` from their surrounding (lexical) scope.
+ * Example: const user = {
+ *   name: "Ali",
+ *   greet: () => {
+ *     console.log(this.name); // ❌ Undefined (does not refer to user)
+ *   } };
+ * 
+ * REGULAR vs ARROW FUNCTION:
+ * Regular Function: Has its own `this`
+ * - Value depends on how it's called
+ * Arrow Function: No own `this`
+ * - Uses `this` from outer scope
+ * 
+ * KEY POINTS:
+ * - Avoid using arrow functions as object methods when you need `this`.
+ * - Arrow functions are useful for callbacks and short functions.
+ * - `this` behavior is one of the biggest differences between regular and arrow functions.
+ * 
+ *********************************************************************/
+
+const webUser = {
+  username: "Muhammad Rizwan",
+  price: 999,
+  welcomeMessage: function () {
+    console.log(`${this.username}, welcome to our website. `);
+  },
+};
+
+// webUser.welcomeMessage();
+// webUser.username = "Abu Bakr";
+// webUser.welcomeMessage();
+
+function myFunc() {
+  let username = "Muhammad Bakir";
+  console.log(this.username);
+}
+// myFunc();
+
+const myArrowF = () => {
+  let username = "Muhammad Bakir";
+  console.log(this);
+};
+// myArrowF();
+
+// const addTwoN = (num1, num2) => {
+//   return num1 + num2;
+// };
+
+const addTwoN = (num1, num2) => num1 + num2;
+
+// console.log(addTwoN(8, 5));
