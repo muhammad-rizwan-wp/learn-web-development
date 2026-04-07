@@ -967,7 +967,7 @@ const addTwo = function (num) {
  *   name: "Ali",
  *   greet() {
  *     console.log(this.name); // "Ali"   } };
- * 
+ *
  * ARROW FUNCTIONS (ES6): Introduced in ES6 (ECMAScript 2015).
  * - Shorter syntax compared to regular functions.
  * - DO NOT have their own `this`.
@@ -977,18 +977,18 @@ const addTwo = function (num) {
  *   greet: () => {
  *     console.log(this.name); // ❌ Undefined (does not refer to user)
  *   } };
- * 
+ *
  * REGULAR vs ARROW FUNCTION:
  * Regular Function: Has its own `this`
  * - Value depends on how it's called
  * Arrow Function: No own `this`
  * - Uses `this` from outer scope
- * 
+ *
  * KEY POINTS:
  * - Avoid using arrow functions as object methods when you need `this`.
  * - Arrow functions are useful for callbacks and short functions.
  * - `this` behavior is one of the biggest differences between regular and arrow functions.
- * 
+ *
  *********************************************************************/
 
 const webUser = {
@@ -1022,3 +1022,427 @@ const myArrowF = () => {
 const addTwoN = (num1, num2) => num1 + num2;
 
 // console.log(addTwoN(8, 5));
+
+/********************************** - End - **********************************/
+
+/* >>> IIFE (Imediately Invoked Function Expression) <<< */
+
+/********************************************************************
+ * An IIFE is a function that is defined and executed immediately after its creation.
+ * It is wrapped in parentheses to turn it into an expression, and then invoked right away.
+ * Syntax:
+ * (function () {
+ *   // code
+ * })();
+ * PURPOSE:
+ * - To execute code immediately after defining it.
+ * - To create a separate (private) scope.
+ * - To avoid polluting the global scope with variables.
+ * This is useful when:
+ * - Initializing an application
+ * - Connecting to databases or running setup code
+ * - Avoiding conflicts with global variables
+ * PRIVATE SCOPE:
+ * Variables declared inside an IIFE are not accessible outside, which protects your code from global scope interference.
+ * NAMED IIFE:
+ * (function init() {
+ *   console.log("App initialized");
+ * })();
+ * ARROW FUNCTION IIFE:
+ * (() => {
+ *   console.log("Arrow IIFE");
+ * })();
+ * IMPORTANT NOTE (Semicolon):
+ * - When using multiple IIFEs, always end the previous one with `;`
+ * - Without a semicolon, JavaScript may throw an error because it
+ *   tries to treat the next IIFE as a function call.
+ * Example:
+ * (function () {
+ *   console.log("First IIFE");
+ * })();
+ * (function () {
+ *   console.log("Second IIFE");
+ * })();
+ * KEY POINTS:
+ * - Runs immediately after being defined
+ * - Helps avoid global scope pollution
+ * - Creates its own private scope
+ * - Common in older JavaScript (before ES6 modules)
+ *
+ *********************************************************************/
+
+(function dbConnection() {
+  // Named IIFE
+  // console.log("My db has been connected. ✅");
+})();
+
+((name) => {
+  // Paramter IIFE & Arrow IIFE
+  // console.log(`${name}, your db has been connected. ✅`);
+})("Muhammad");
+
+/********************************** - End - **********************************/
+
+/* >>> Call Stack & JavaScript Execution Context <<< */
+
+/********************************************************************
+ * JavaScript Execution Context:
+ * It defines how JavaScript runs your code behind the scenes.
+ * Whenever a JS file runs, the engine creates an Execution Context.
+ * TYPES OF EXECUTION CONTEXT:
+ * 1) Global Execution Context (GEC)
+ *    - Created when the JS file first runs.
+ *    - Stored in the `this` keyword.
+ *    - In browsers: `this` → window object
+ *    - In Node.js: `this` → empty object {}
+ * 2) Function Execution Context (FEC)
+ *    - Created every time a function is invoked.
+ * 3) Eval Execution Context (rarely used)
+ * JavaScript is SINGLE-THREADED: Executes one operation at a time.
+ *
+ * TWO PHASES OF EXECUTION:
+ * 1) Memory Creation Phase (MCP) / Creation Phase:
+ *    - Memory is allocated for variables and functions.
+ *    - Variables are initialized with `undefined`.
+ *    - Functions are stored with their full definitions.
+ * 2) Execution Phase (EP):
+ *    - Code is executed line by line.
+ *    - Variables are assigned actual values.
+ *    - Functions are invoked.
+ * STEP-BY-STEP EXECUTION:
+ * 1) Global Execution Context (GEC) is created. `this` is assigned
+ * 2) Memory Creation Phase: Variables → undefined
+ *    - Functions → full definitions stored
+ * 3) Execution Phase:
+ *    - Variables get actual values
+ *    - When a function is called:
+ *        → A new Function Execution Context (FEC) is created
+ *        → It has its own: Variable environment & Execution thread
+ *    - Inside each function: MCP and EP run again
+ *    - After execution: Function context is removed (deleted)
+ *
+ * CALL STACK:
+ * - A data structure used to manage execution contexts.
+ * - Works on LIFO (Last In, First Out) principle.
+ * FLOW:
+ * 1) Global Execution Context is pushed into the stack
+ * 2) When a function is called:
+ *    → Its context is pushed onto the stack
+ * 3) When function execution completes:
+ *    → It is popped (removed) from the stack
+ * Example:
+ * function one() {
+ *   two();
+ * }
+ * function two() {
+ *   console.log("Hello");
+ * }
+ * one();
+ * Stack Order: GEC → one() → two() → (pop) → (pop)
+ *
+ * KEY POINTS:
+ * - JS runs code using Execution Contexts
+ * - Each function call creates a new context
+ * - Call Stack manages execution order
+ * - JavaScript is single-threaded
+ *********************************************************************/
+
+/********************************** - End - **********************************/
+
+/* >>> Control Flow <<< */
+
+/********************************************************************
+ * Control Flow: Control flow defines how a program decides which code to execute and in what sequence. By default, JavaScript runs code line by line (top → bottom), but control flow statements allow us to:
+ * 1. Skip code 2. Repeat code 3. Choose between multiple paths
+ * It is the foundation of decision-making in programming.
+ * IF - ELSE STATEMENT: Used to execute code based on conditions (true/false).
+ * How it works: The condition inside 'if' is evaluated.
+ * - If it is TRUE → IF block executes.
+ * - If FALSE → ELSE block executes.
+ * 'else if' allows checking multiple conditions step by step.
+ * Only the FIRST true condition runs, and the rest are ignored.
+ * Important:
+ * - Conditions are converted to boolean automatically.
+ * - Nested if-else (if inside another if) is also possible.
+ * Use case:
+ * - Decision making (age check, login check, grading system, etc.)
+ * COMPARISON OPERATORS
+ * Used to compare two values and return true or false.
+ * >   : checks if left value is greater than right
+ * <   : checks if left value is less than right
+ * >=  : checks if left is greater than or equal
+ * <=  : checks if left is less than or equal
+ * ==  : loose equality → compares only values (performs type conversion automatically)
+ * === : strict equality → compares value AND type (no type conversion, safer and predictable)
+ * !=  : loose not equal
+ * !== : strict not equal
+ * Important: Always prefer === and !== to avoid unexpected bugs
+ * - JavaScript can convert types automatically with ==,  which may lead to confusing results
+ * SWITCH CASE: Used when comparing a single value against multiple fixed options.
+ * How it works: Expression is evaluated once.
+ * - It is compared with each 'case' using strict equality (===).
+ * - When a match is found → that block runs.
+ * 'break' keyword: Stops execution after a case runs.
+ * - Without break → "fall-through" happens (next cases also run)
+ * 'default': Optional block
+ * - Runs when no case matches
+ * Use case: Menu selection, day of week, role-based logic
+ * Note: Better than if-else when checking many exact values
+ * TRUTHY & FALSY VALUES: In JavaScript, every value can be treated as true or false. when used in conditions.
+ * Falsy values (ONLY these are false): false, 0, -0, 0n (BigInt zero), "" (empty string), null, undefined, NaN
+ * Truthy values: Everything else (even if it looks false!)
+ * Examples: "0", "false", " " (space), [] (empty array), {} (empty object), function() {}
+ * Important: Empty array [] and object {} are truthy (common confusion)
+ * Used heavily in conditions like: if(value)
+ * LOGICAL OPERATORS:Used to combine or modify conditions.
+ * && (AND): Returns true only if ALL conditions are true.
+ * Stops early if a false value is found (short-circuit)
+ * || (OR): Returns true if ANY one condition is true
+ * Stops early if a true value is found
+ * ! (NOT): Converts true → false
+ * Converts false → true
+ * Important: These operators don’t always return true/false
+ * They return actual values (due to short-circuiting)
+ * Use case: Authentication checks, validation, multiple conditions
+ * NULLISH COALESCING OPERATOR (??): Used to provide a default value ONLY when the left side is null or undefined.
+ * Syntax: value ?? defaultValue
+ * Behavior: If value is null or undefined → returns defaultValue
+ * - Otherwise → returns value itself
+ * Difference from ||: || treats ALL falsy values as missing (0, "", false). ?? treats ONLY null and undefined as missing
+ * Why important: Prevents bugs when 0 or "" are valid values
+ * Use case: Setting safe default values
+ * TERNARY OPERATOR: A shorter way to write if-else in one line.
+ * Syntax: condition ? expression_if_true : expression_if_false
+ * How it works: If condition is true → first value runs
+ * - If false → second value runs
+ * Important: Best for simple conditions
+ * - Avoid using nested ternary (hard to read)
+ * Use case: Assigning values, small decisions
+ * SHORT-CIRCUITING: A behavior of logical operators (&& and ||).  where evaluation stops as soon as result is determined.
+ * && (AND): Returns first falsy value OR last truthy value
+ * || (OR): Returns first truthy value
+ * Why useful: Can replace if-else in short conditions
+ * - Improves performance by skipping unnecessary checks
+ * Example concept: If first condition decides the result, rest is ignored
+ * Use case: Default values, conditional execution, optimization
+ *
+ ********************************************************************/
+
+// if (2 == "2") {
+//   console.log("Extected");
+// }
+// if (2 === "2") {
+//   // console.log("Extected");
+// }
+
+// let tempOfRoom = 45;
+// if (tempOfRoom < 50) {
+//   // console.log("Temperature of room is less than 50.");
+// } else {
+//   // console.log("Temperature of room is greater than 50.");
+// }
+
+// const month = 5;
+// switch (month) {
+//   case 1:
+//     console.log("Jan");
+//     break;
+//   case 2:
+//     console.log("Feb");
+//     break;
+//   case 3:
+//     console.log("Mar");
+//     break;
+//   case 4:
+//     console.log("Apr");
+//     break;
+//   case 5:
+//     console.log("May");
+//     break;
+//   case 6:
+//     console.log("Jun");
+//     break;
+//   case 7:
+//     console.log("Jul");
+//     break;
+//   case 8:
+//     console.log("Aug");
+//     break;
+//   case 9:
+//     console.log("Sept");
+//     break;
+//   case 10:
+//     console.log("Oct");
+//     break;
+//   case 11:
+//     console.log("Nov");
+//     break;
+//   case 12:
+//     console.log("Dec");
+//     break;
+//   default:
+//     console.log("Please enter proper input value. For Ex. [1-12]");
+// }
+
+let val1;
+// val1 = 5 ?? 10;
+// val1 = null ?? 10;
+// val1 = undefined ?? 10;
+// console.log(val1);
+
+/* >>> Ternary <<<*/
+// Syntax: condition ? true : false;
+
+const iceTeaPrice = 100;
+// iceTeaPrice <= 80
+//   ? console.log("Less than 80")
+//   : console.log("Greater than 80");
+
+/********************************** - End - **********************************/
+
+/* >>> FOR LOOP <<< */
+
+/********************************************************************
+ * Used to execute a block of code repeatedly for a specific number of times.
+ * Syntax: for (initialization; condition; increment/decrement) {    // code to run   }
+ * How it works: 1. Initialization runs once (e.g., let i = 0)
+ * 2. Condition is checked before every iteration
+ * 3. If condition is true → loop body runs
+ * 4. Increment/Decrement updates the loop variable
+ * 5. Steps 2–4 repeat until condition becomes false
+ * Use case: When you know how many times you want to run the loop
+ * LOOPING THROUGH ARRAY: Arrays use index-based access (starting from 0)
+ * Important: Always use i < array.length
+ * If you use i <= array.length → it will go one step extra and return undefined (because index is out of range)
+ * Example concept: array = [10, 20, 30]
+ * length = 3 // valid indexes = 0, 1, 2
+ * NESTED LOOP: A loop inside another loop
+ * How it works: Outer loop runs first.
+ * For each iteration of outer loop, inner loop runs completely
+ * Use case: Patterns (stars, numbers)
+ * Working with 2D arrays (matrix, tables)
+ * Important: Time complexity increases (O(n²) or more)
+ * Be careful with performance in large data
+ * BREAK STATEMENT: Used to completely stop the loop execution immediately when a certain condition is met
+ * Behavior: Exits the loop instantly
+ * Control moves to the next statement after the loop
+ * Use case: Stop searching when item is found
+ * Exit early to save performance
+ * CONTINUE STATEMENT: Used to skip the current iteration of the loop when a condition is met
+ * Behavior: Skips only that specific iteration
+ * Loop continues with the next iteration
+ * Use case: Ignore unwanted values
+ * Skip specific cases without stopping the loop
+ * Infinite Loop:
+ * If condition never becomes false, loop runs forever (e.g., missing increment)
+ * Loop Control: Always ensure condition will eventually become false
+ * Readability: Keep loops simple and avoid too much nesting
+ *
+ ********************************************************************/
+
+// for (let i = 0; i <= 10; i++) {
+//   if (i == 8) {
+//     console.log(`${i} is best number.`);
+//   }
+//   console.log(i);
+// }
+
+for (let i = 0; i <= 5; i++) {
+  // console.log(`✅ Outer Loop Value: ${i}`);
+  for (let j = 0; j <= 5; j++) {
+    // console.log(`Inner Loop Value: ${j}`);
+    //console.log(`${i} * ${j} = ${i * j}`);
+  }
+  // console.log("-----------------------------------------------");
+}
+
+// const myArray = [
+//   "Muhammad Rizwan",
+//   "Saim",
+//   "Abu Bakr",
+//   "Muhammad Umar",
+//   "Zinn Noorain",
+// ];
+// for (let index = 0; index < myArray.length; index++) {
+//   const element = myArray[index];
+//   console.log(element);
+// }
+
+// for (let index = 1; index <= 10; index++) {
+//   if (index == 5) {
+//     console.log("5 is detected");
+//     break;
+//   }
+//   console.log(`Value of "index" is: ${index}`);
+// }
+
+// for (let index = 1; index <= 10; index++) {
+//   if (index == 5) {
+//     console.log("5 is detected");
+//     continue;
+//   }
+//   console.log(`Value of "index" is: ${index}`);
+// }
+
+/********************************** - End - **********************************/
+
+/* >>> WHILE & DO-WHILE <<< */
+
+/********************************************************************
+ * WHILE LOOP: Used to execute a block of code repeatedly as long as a given condition remains true.
+ * Syntax: while (condition) {  // code,     // update (increment/decrement)  }
+ * How it works: 1. Condition is checked FIRST
+ * 2. If true → loop body runs
+ * 3. After execution, condition is checked again
+ * 4. Loop continues until condition becomes false
+ * Important: Initialization (index/counter) is written OUTSIDE the loop
+ * You must update the counter inside the loop
+ * If you forget update → infinite loop
+ * Use case: When number of iterations is NOT known beforehand
+ * DO-WHILE LOOP:
+ * Similar to while loop, but guarantees at least ONE execution
+ * Syntax: do {    // code,    // update } while (condition);
+ * How it works: 1. Loop body runs FIRST (without checking condition)
+ * 2. Condition is checked AFTER execution
+ * 3. If true → repeats
+ * 4. If false → stops
+ * Key Difference from while: while → checks condition before running
+ * do-while → runs first, checks later
+ * Important: Executes at least once even if condition is false
+ * Use case: When code must run at least once (e.g., menu systems, user input prompts)
+ * KEY DIFFERENCES:
+ * while: Condition checked before execution
+ * May run 0 times
+ * do-while: Condition checked after execution
+ * Runs at least 1 time
+ *
+ ********************************************************************/
+
+// let index = 0;
+// while (index <= 10) {
+//   console.log(`Value of index is: ${index} out of 10`);
+//   index = index + 2;
+// }
+
+// const myArray = [
+//   "Muhammad Rizwan",
+//   "Saim",
+//   "Abu Bakr",
+//   "Muhammad Umar",
+//   "Zinn Noorain",
+// ];
+
+// let arrIndex = 0;
+// while (arrIndex < myArray.length) {
+//   console.log(`${arrIndex} at ${myArray[arrIndex]}`);
+//   arrIndex++;
+// }
+
+// let scoree = 1;
+// do {
+//   console.log(`Socre is ${scoree}`);
+//   scoree++;
+// } while (scoree <= 10);
+
+/********************************** - End - **********************************/
+
