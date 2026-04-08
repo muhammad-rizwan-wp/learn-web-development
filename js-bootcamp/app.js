@@ -1446,3 +1446,221 @@ for (let i = 0; i <= 5; i++) {
 
 /********************************** - End - **********************************/
 
+/* >>> HIGHER-ORDER ARRAY LOOPS <<< */
+
+/********************************************************************
+ * These loops are used to iterate over arrays, objects, and other iterable data structures in a cleaner and more modern way than traditional loops.
+/* FOR-OF LOOP: Used to iterate over VALUES of iterable objects (arrays, strings, maps, sets, etc.)
+ * Syntax: for (let value of iterable) {    // code }
+ * How it works: Directly gives each VALUE one by one
+ * No need to use index
+ * Important: Works only on ITERABLES (arrays, strings, etc.)
+ * Does NOT work directly on plain objects
+ * Use case: When you only need values
+ * Cleaner and easier than traditional for loop
+ * FOR...IN LOOP: Used to iterate over KEYS (property names / indexes)
+ * Syntax: for (let key in object) {    // code }
+ * How it works: Returns keys (for objects)
+ * Returns index (for arrays)
+ * Important: Mainly used for OBJECTS
+ * Can be used on arrays, but NOT recommended
+ * because it gives index (not values)
+ * Use case: Looping through object properties
+ * FOR-EACH LOOP: Built-in array method (array.prototype.forEach)
+ * Syntax: array.forEach(function(value, index, array) {  // code   });
+ * How it works: Runs a callback function for each element in array
+ * - Provides:   value → current element,   index → current index,    array → original array
+ * Important: Works ONLY on arrays
+ * Cannot use break or continue
+ * Always loops through entire array
+ * Use case: When you want to perform an action on every element
+ * KEY DIFFERENCES: 
+ * for...of: Gives VALUES directly
+ * - Works on iterable data (arrays, strings)
+ * for...in: Gives KEYS (object properties / array indexes)
+ * Best for objects
+ * forEach: Array method
+ * Uses callback function
+ * No break/continue
+ * 
+ ********************************************************************/
+
+const numArray = [1, 2, 3, 4, 5];
+
+// for (const num of numArray) {
+//   console.log(num);
+// }
+
+// const myName = "Muhammad Rizwan";
+// for (const name of myName) {
+//   console.log(name);
+// }
+
+const countries = {
+  IR: "Iran",
+  PL: "Palestine",
+  IQ: "Iraq",
+  YE: "Yeman",
+};
+
+// for (const [key, value] of countries) {
+//   console.log(`${key}: ${value}`); // TypeError: countries is not iterable
+// }
+
+for (const key in countries) {
+  // console.log(`${key} for ${countries[key]}`);
+}
+
+for (const key in numArray) {
+  // console.log(key); // It return key / index
+  // console.log(numArray[key]);
+}
+
+numArray.forEach((item, index, arr) => {
+  // console.log(item, index, arr);
+});
+
+const langExtension = [
+  {
+    langName: "Javascript",
+    langExt: ".js",
+  },
+  {
+    langName: "CSS",
+    langExt: ".css",
+  },
+  {
+    langName: "HTML",
+    langExt: ".html/.htm",
+  },
+];
+
+langExtension.forEach((item) => {
+  // console.log(item.langName);
+});
+
+/********************************** - End - **********************************/
+
+/* >>> Filter, Map & Reducer <<< */
+
+/********************************************************************
+ * filter():
+ * Returns a NEW array containing elements that pass a condition.
+ * The callback should return true/false.
+ * Does NOT modify the original array.
+ * forEach():
+ * Executes a function on each element but returns undefined.
+ * Mainly used for side effects (e.g., logging, updating values).
+ * map():
+ * Returns a NEW array by transforming each element.
+ * The callback defines how each element is changed.
+ * One of the most commonly used array methods.
+ * Chaining:
+ * We can chain these methods together. Example: array.map(...).filter(...).map(...)
+ * reduce():
+ * Executes a reducer callback on each element of the array.
+ * Reduces the array to a SINGLE value (number, object, array, etc.).
+ * Takes an accumulator and current value as arguments.
+ * Can also accept an initial value.
+ * Example reducer signature:  array.reduce((accumulator, currentValue) => { ... }, initialValue)
+ * Note:
+ * - All these methods are immutable (they do not change the original array, except for side effects inside forEach).
+ *
+ ********************************************************************/
+
+const codingLanguages = [
+  "HTML",
+  "CSS",
+  "JS",
+  "REACT",
+  "C#",
+  "Node",
+  "Python",
+  "PHP",
+];
+
+const myCounting = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+const result = myCounting.filter((num) => num > 2);
+// console.log(result);
+
+const books = [
+  {
+    title: "Book 1",
+    genre: "Fiction",
+    publish: 1980,
+    edition: 2000,
+  },
+  {
+    title: "Book 2",
+    genre: "Non Fiction",
+    publish: 1996,
+    edition: 1999,
+  },
+  {
+    title: "Book 3",
+    genre: "Fiction",
+    publish: 1985,
+    edition: 1995,
+  },
+  {
+    title: "Book 4",
+    genre: "Non Fiction",
+    publish: 2000,
+    edition: 2005,
+  },
+  {
+    title: "Book 5",
+    genre: "Fiction",
+    publish: 2006,
+    edition: 2006,
+  },
+  {
+    title: "Book 6",
+    genre: "Fiction",
+    publish: 1999,
+    edition: 2000,
+  },
+];
+
+const filterBooks = books.filter((item) => item.genre == "Fiction");
+// console.log(filterBooks);
+
+const addTen = myCounting.map((item) => item + 10);
+// console.log(addTen);
+
+const multTen = myCounting
+  .map((num) => num * 10)
+  .map((num) => num + 1)
+  .filter((num) => num >= 50);
+// console.log(multTen);
+
+const initialValue = 0;
+// const sumWithInital = myCounting.reduce((acc, cur) => acc + cur, initialValue);
+// console.log(sumWithInital);
+
+const myTotal = myCounting.reduce((acc, cur) => {
+  // console.log(`Acc: ${acc} - Current Value: ${cur}`);
+  return acc + cur;
+}, 0);
+// console.log(myTotal);
+
+const shoppingCart = [
+  {
+    itemName: "JS Course",
+    price: 4999,
+  },
+  {
+    itemName: "C# Course",
+    price: 3999,
+  },
+  {
+    itemName: "MERN Course",
+    price: 8999,
+  },
+];
+
+const totalCount = shoppingCart.reduce((acc, cur) => {
+  return acc + cur.price;
+}, 0);
+
+console.log(totalCount);
