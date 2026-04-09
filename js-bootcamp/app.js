@@ -1664,3 +1664,201 @@ const totalCount = shoppingCart.reduce((acc, cur) => {
 }, 0);
 
 console.log(totalCount);
+
+/********************************** - End - **********************************/
+
+/* >>> DOM (Document Object Model) <<< */
+
+/********************************************************************
+ * Document Object Model (DOM):
+ * A programming interface for HTML/XML documents.
+ * Represents the document as a tree structure of nodes (objects).
+ * Allows JavaScript to access, modify, add, and delete elements.
+ * console.dir(): Displays a JavaScript representation of the DOM object.
+ * Useful for inspecting properties and methods of elements.
+ * DOM Hierarchy (Tree Structure): window → document → html → head + body
+ * HTML Structure:
+ * <html> has two main children:
+ *   1. <head>   2. <body>
+ * HEAD contains:
+ * <title> → contains a text node
+ * <meta> → contains attributes (no inner text)
+ * (also includes link, style, script, etc.)
+ * BODY contains:
+ * Visible content of the webpage
+ * Structured using nested elements (containers)
+ * Example Structure:
+ * section
+ *    └── div
+ *         ├── h1 (attributes + text node)
+ *         ├── p  (attributes + text node)
+ *         └── button (attributes + text node)
+ * Nodes in DOM:
+ * - Element Node (e.g., <div>, <p>)
+ * - Text Node (text inside elements)
+ * - Attribute Node (attributes like class, id)
+ * HTMLCollection:
+ * A live collection of DOM elements.
+ * Automatically updates when the DOM changes.
+ * Returned by methods like getElementsByClassName().
+ * Note:
+ * NodeList is similar but can be static (e.g., querySelectorAll()).
+ * DOM manipulation allows dynamic web page updates.
+ *
+ ********************************************************************/
+
+/********************************** - End - **********************************/
+
+/* >>> DOM Selectors NodeList  <<< */
+
+/********************************************************************
+ * Selectors:
+ * getElementById('id'): Selects a single element by its unique ID.
+ * querySelector(selector): Selects the FIRST element that matches a CSS selector.
+ * Examples: 'div'           → first div | '#id'           → element with id | '.className'    → first element with class | 'input[type="text"]' → attribute selector
+ * querySelectorAll(selector): Selects ALL matching elements and returns a NodeList.
+ * getElementsByClassName('className'): Selects elements by class name and returns an HTMLCollection. (Use "className" in JS because "class" is a reserved keyword)
+ * Working with Elements:
+ * el.innerText   → returns only visible text
+ * el.textContent → returns all text (visible + hidden)
+ * el.innerHTML   → returns or sets full HTML inside element
+ * Attributes:
+ * el.getAttribute('attr')        → get attribute value
+ * el.setAttribute('attr', val)   → set/overwrite attribute
+ * Styling: el.style.propertyName = "value"
+ * Example: el.style.color = "red"
+ * NodeList:
+ * Returned by querySelectorAll()
+ * Array-like but NOT a real array
+ * Supports forEach()
+ * Does not support all array methods directly
+ * HTMLCollection:
+ * Returned by getElementsByClassName()
+ * Array-like but NOT a real array
+ * Live collection (updates automatically when DOM changes)
+ * Does not support forEach in older environments
+ * Convert to Array: Use when you need full array methods (map, filter, etc.)
+ * Example: const arr = Array.from(collection);
+ * Notes: NodeList is usually static (does not auto-update)
+ * HTMLCollection is live (auto-updates)
+ * setAttribute() always overrides existing values
+ *
+ ******************************************************************** */
+
+const titleH1 = document.getElementById("title");
+// console.log(
+//   `ID: ${titleH1.id}, Class: ${titleH1.className}, Attributes: ${titleH1.getAttribute("id")} Content: ${titleH1.textContent}`,
+// );
+
+/********************************** - End - **********************************/
+
+/* >>> Create a new Element in DOM  <<< */
+
+/**********************************************************
+ * Creating elements in the DOM means dynamically adding new HTML elements using JavaScript so they appear on the webpage.
+ * Creating Elements: document.createElement('tagName'): Creates a new HTML element.
+ * Example: const div = document.createElement('div');
+ * document.createTextNode('text'): Creates a text node (used to add plain text inside elements).
+ * Example: const text = document.createTextNode('Hello World');
+ * appendChild(): Adds a node (element or text) inside another element.
+ * Example: div.appendChild(text);
+ * append(): Can add multiple nodes or text at once (modern alternative).
+ * DOM Navigation Properties:
+ * el.children: Returns all child elements (HTMLCollection). (Only element nodes, not text or comments)
+ * el.firstElementChild: Returns the first child element.
+ * el.lastElementChild: Returns the last child element.
+ * el.parentElement: Returns the parent element of the current element.
+ * el.nextElementSibling: Returns the next sibling element (next element on same level).
+ * el.previousElementSibling: Returns the previous sibling element.
+ * Important Notes: children returns an HTMLCollection (live collection).
+ * Use Array.from() if you need array methods.
+ * Text nodes are separate from element nodes.
+ * Always append created elements to make them visible in DOM.
+ * Example Flow:
+ * const div = document.createElement('div');
+ * const text = document.createTextNode('Hello');
+ * div.appendChild(text);
+ * document.body.appendChild(div);
+ *
+ ******************************************************************** */
+
+const container = document.querySelector(".week_days");
+const dayOne = document.querySelector(".day");
+
+// console.log(container.children[0].innerHTML);
+
+// console.log(container.firstElementChild);
+// console.log(container.lastElementChild);
+
+for (let i = 0; i < container.children.length; i++) {
+  // console.log(`${container.children[i].innerHTML} at index ${i}`);
+}
+
+// console.log(dayOne.parentElement);
+// console.log(dayOne.nextElementSibling);
+
+const createDiv = document.createElement("div");
+createDiv.id = "el-dom";
+createDiv.className = "dom__el";
+createDiv.setAttribute("title", "Generated Element by Dom");
+createDiv.style.color = "green";
+createDiv.style.padding = "12px";
+
+const divContent = document.createTextNode("Muhammad Rizwan");
+// createDiv.appendChild(divContent);
+// document.body.appendChild(createDiv);
+
+/********************************** - End - **********************************/
+
+/* >>> Edit & Remove Element in DOM  <<< */
+
+/**********************************************************
+ * Definition:
+ * Editing and removing elements in the DOM means modifying existing elements (content, structure, or attributes) or deleting them using JavaScript.
+ * Appending Elements:
+ * appendChild(): Adds a new element inside a parent container.
+ * Example: parent.appendChild(child);
+ * Note: Moves the element if it already exists (does not duplicate).
+ * Can cause performance issues when adding many elements (100+), because each insertion may trigger DOM reflow (tree traversal).
+ * Performance Tip: Instead of multiple appendChild calls, use:
+ * Editing Elements: querySelector(): Very useful for selecting elements using CSS selectors, including advanced selectors like: ':nth-child()', '.className', '#id'
+ * You can edit:  Text → el.innerText / el.textContent, HTML → el.innerHTML, Attributes → setAttribute(),  Styles → el.style.property
+ * Removing Elements:
+ * remove(): Removes the selected element from the DOM.
+ * Example:  el.remove();
+ * removeChild(): Removes a child from a parent.
+ * Example: parent.removeChild(child);
+ * Important Notes:
+ * Frequent DOM updates can slow performance.
+ * Batch updates when possible.
+ * Use modern methods like append() and remove() for cleaner code.
+ *
+ ******************************************************************** */
+
+/* NonOptimized way*/
+function addWeekDay(weekDay) {
+  const createItem = document.createElement("div");
+  createItem.innerHTML = `${weekDay}`;
+  document.querySelector(".week_days").appendChild(createItem);
+}
+// addWeekDay("Friday");
+// addWeekDay("Saturday");
+
+/* Optimized way*/
+function addWeekDayOptimized(weekDay) {
+  const createItem = document.createElement("div");
+  createItem.appendChild(document.createTextNode(weekDay));
+  document.querySelector(".week_days").appendChild(createItem);
+}
+// addWeekDayOptimized("Friday");
+// addWeekDayOptimized("Saturday");
+
+// Edit
+const editText = document.querySelector(".week_days div:nth-child(2)");
+const updateDay = document.createElement("div");
+updateDay.textContent = "TUESDAY";
+editText.replaceWith(updateDay);
+
+// Remove
+const deleteLastItem = document.querySelector(".week_days div:last-child");
+deleteLastItem.remove();
