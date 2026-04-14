@@ -2011,3 +2011,80 @@ deleteLastItem.remove();
  * - Async behavior in JS is achieved using:
  *   → Call Stack + Web APIs + Queues + Event Loop
  **********************************************************/
+
+/********************************** - End - **********************************/
+
+/* >>> setTimeout, setInterval & Clearing Timers  <<< */
+
+/**********************************************************
+ * setTimeout(): setTimeout() is NOT part of core JavaScript.
+ * It is provided by the runtime environment (Browser → Web API, Node.js → Timer API).
+ * Purpose: Executes a function ONCE after a specified delay (in milliseconds).
+ * Syntax: setTimeout(callback, delay);
+ * Example:  setTimeout(() => {  console.log("Runs after 2 seconds");   }, 2000);
+ * How it works internally:
+ * - JS sends setTimeout to Web API
+ * - Web API starts a timer
+ * - After delay → callback moves to Task Queue
+ * - Event Loop pushes it to Call Stack when it's empty
+ * Real-life use: Showing popup ads after delay, Delayed notifications, Splash screens
+ * IMPORTANT:
+ * - Even if delay = 0, it does NOT run immediately
+ * - It still waits for Call Stack to be empty
+ *
+ * setInterval(): Also NOT part of core JS → provided by environment
+ * Purpose: Repeatedly runs a function after every given interval
+ * Syntax:  setInterval(callback, interval);
+ * Example:   setInterval(() => {    console.log("Runs every 1 second");   }, 1000);
+ * Behavior:
+ * - Keeps executing again and again (infinite loop-like)
+ * - Runs until manually stopped
+ * Use cases: Clock updates, Live data refresh (e.g., stock prices), Animations / polling APIs
+ *
+ * clearInterval(): Used to STOP a running setInterval()
+ * IMPORTANT CORRECTION:
+ * - setInterval runs infinitely by default
+ * - clearInterval STOPS it (not continues it)
+ * Syntax: const id = setInterval(callback, interval);
+ *   clearInterval(id);
+ * Example:   const id = setInterval(() => {     console.log("Running...");   }, 1000);
+ *   setTimeout(() => {     clearInterval(id); // stops after 5 sec   }, 5000);
+ *
+ * clearTimeout():  Used to CANCEL a scheduled setTimeout BEFORE it executes
+ * Syntax:   const id = setTimeout(callback, delay);
+ *   clearTimeout(id);
+ * Example:   const id = setTimeout(() => {   console.log("This will NOT run");   }, 3000);
+ *   clearTimeout(id); // cancels it immediately
+ * Behavior: If called before timer finishes → callback never runs
+ *
+ * Key Differences
+ * setTimeout: Runs ONCE,  Can be cancelled with clearTimeout
+ * setInterval: Runs REPEATEDLY,  Must be stopped with clearInterval
+ *
+ * Internal Working Summary
+ * - setTimeout / setInterval → handled by Web APIs
+ * - After time completes → callback goes to Task Queue
+ * - Event Loop moves it to Call Stack when empty
+ *
+ * Common Mistakes
+ * - Thinking setTimeout runs exactly on time → WRONG
+ *   → It runs AFTER delay + when stack is free
+ * - Forgetting clearInterval → causes infinite execution
+ * - Mixing Promise vs setTimeout priority
+ *
+ **********************************************************/
+
+/*
+const delayed = setTimeout(() => {
+  console.log("Muhammad");
+}, 2000);
+
+document.querySelector("body").addEventListener("click", () => {
+  clearTimeout(delayed);
+  console.log("STOP Clicked");
+});
+*/
+
+// setInterval(() => {
+//   console.log("Muhammad", Date.now());
+// }, 1000);
