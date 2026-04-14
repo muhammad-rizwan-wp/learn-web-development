@@ -1862,3 +1862,152 @@ editText.replaceWith(updateDay);
 // Remove
 const deleteLastItem = document.querySelector(".week_days div:last-child");
 deleteLastItem.remove();
+
+/********************************** - End - **********************************/
+
+/* >>> Events in JS  <<< */
+
+/**********************************************************
+ * An event in JavaScript is an action or occurrence that happens in the browser (by user or system), which JavaScript can detect and respond to.
+ * In simple terms: Event = "Something happens" → JavaScript reacts
+ * Examples of Events:
+ * User Events:
+ * - click       → user clicks element
+ * - mouseover   → mouse enters element
+ * - keydown     → key pressed
+ * - submit      → form submitted
+ * Browser Events:
+ * - load        → page loaded
+ * - resize      → window resized
+ * - scroll      → page scrolled
+ * Event Handling:
+ * Best method: element.addEventListener(eventType, callback, useCapture);
+ * Parameters:
+ * - eventType  → "click", "keydown", etc.
+ * - callback   → function to execute
+ * - useCapture → true (capturing) / false (bubbling, default)
+ * Example:
+ * button.addEventListener("click", function() {
+ *   console.log("Clicked");
+ * });
+ * Event Object: When an event occurs, JavaScript creates an event object (commonly 'e' or 'event') containing event information.
+ * Important properties:
+ * - e.type            → event type
+ * - e.target          → element that triggered event
+ * - e.currentTarget   → element with listener
+ * - e.timeStamp       → event time
+ * - e.clientX / Y     → mouse position (viewport)
+ * - e.screenX / Y     → mouse position (screen)
+ * - e.key             → key pressed
+ * - e.ctrlKey, shiftKey, altKey → modifier keys
+ * Event Propagation: Process of event traveling through DOM elements.
+ * Two phases: 1. Capturing Phase (top → down) 2. Bubbling Phase (bottom → up) [DEFAULT]
+ * Example (Bubbling): Child → Parent → Document
+ * Event Bubbling: Event starts from target element and moves upward.
+ * Example output: Child clicked, Parent clicked
+ * Event Capturing: Event starts from root and moves downward.
+ * Enable by: addEventListener("click", handler, true);
+ * stopPropagation(): Stops event from continuing its propagation.
+ * Example: e.stopPropagation();
+ * preventDefault(): Prevents browser’s default behavior.
+ * Examples: - Stop form submission, - Stop link navigation
+ * Example: e.preventDefault();
+ * target vs currentTarget:
+ * - e.target        → actual clicked element
+ * - e.currentTarget → element with event listener
+ * Event Delegation: Technique where a parent handles events for its children.
+ * Example: parent.addEventListener("click", function(e) {
+ *   if (e.target.tagName === "LI") {
+ *     console.log("Item clicked");
+ *   }
+ * });
+ * Benefits: Better performance, Works for dynamic elements
+ * Old Method (Deprecated): attachEvent() → used in old Internet Explorer
+ * Summary:
+ * - Events = actions detected by JS
+ * - addEventListener() = modern handling method
+ * - Event object provides details
+ * - Propagation = bubbling + capturing
+ * - stopPropagation() stops flow
+ * - preventDefault() stops default behavior
+ * - Event delegation improves efficiency
+ *
+ **********************************************************/
+
+// document.getElementById("owl").onclick = () => {
+//   alert("This is OWL");
+// };
+
+// document.getElementById("owl").addEventListener(
+//   "click",
+//   () => {
+//     alert("Owl Clicked ....");
+//   },
+//   false,
+// );
+
+// document.getElementById("images").addEventListener(
+//   "click",
+//   (e) => {
+//     console.log("Clicked Inside the UL");
+//   },
+//   false,
+// );
+
+// document.getElementById("owl").addEventListener(
+//   "click",
+//   (e) => {
+//     console.log("Clicked OWL");
+//     e.stopPropagation();
+//   },
+//   false,
+// );
+
+// document.getElementById("google").addEventListener("click", (e) => {
+//   console.log("Goooogle click");
+//   e.preventDefault();
+//   e.stopPropagation();
+// });
+
+// document.getElementById("images").addEventListener("click", (e) => {
+//   if (e.target.tagName === "IMG") {
+//     let remove = e.target.parentNode;
+//     remove.remove();
+//   }
+// });
+
+/********************************** - End - **********************************/
+
+/* >>> Async Fundamental  <<< */
+
+/**********************************************************
+ * JavaScript is synchronous and single-threaded by default.
+ * Code executes line by line, one operation at a time.
+ * Only one task can run at a time (single call stack).
+ * Execution Context: JavaScript runs inside an execution context.
+ * It processes one line at a time using the Call Stack.
+ * Each function call is pushed to the stack and removed after execution.
+ * JavaScript Engine: Consists of 1. Memory Heap → used for storing variables and objects. 2. Call Stack → used to track function execution.
+ * Blocking Code: Stops the program until the task is complete.
+ * Example: synchronous operations like readFileSync().
+ * - While blocking code runs, nothing else can execute.
+ * Non-Blocking Code: Does NOT stop the program flow.
+ * Example: asynchronous operations like readFile(), setTimeout(), fetch().
+ * These tasks are delegated and handled in the background.
+ * Runtime Environment: JavaScript alone (engine) is not enough.
+ * - It runs inside environments like:  → Browser (provides Web APIs)  → Node.js (provides its own APIs)
+ * Web APIs (Browser): Provide async features not part of the JS engine itself.
+ * Examples: → DOM APIs,   → setTimeout / setInterval,   → fetch (HTTP requests),   → event listeners (callbacks)
+ * How Async Works: 1. Async functions are sent to Web APIs. 2. After completion, callbacks are placed in queues.
+ * Queues: Task Queue (Callback Queue):  → Holds callbacks from setTimeout, events, etc.
+ * Promise Queue (Microtask Queue):  → Holds resolved Promise callbacks (.then, .catch).   → Has higher priority than the Task Queue.
+ * Event Loop: - Continuously checks:
+ *   → If Call Stack is empty
+ *   → Then moves tasks from queues into the stack
+ * - Priority:
+ *   → First: Promise Queue (Microtasks)
+ *   → Then: Task Queue (Macrotasks)
+ * Key Idea:
+ * - Async behavior in JS is achieved using:
+ *   → Call Stack + Web APIs + Queues + Event Loop
+ **********************************************************/
