@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Keyboard Check</title>
+    <script src="app.js" defer></script>
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+
+    <nav>
+        <a href="/tasks/KeyboardCheck/index.html" aria-current="page">Home</a>
+        <a target="_blank" href="https://github.com/muhammad-rizwan-wp">Github Account</a>
+    </nav>
+    <section>
+        <div class="project">
+            <div id="insert">
+                <div class="key">Press the key and watch magic</div>
+            </div>
+        </div>
+    </section>
+</body>
+
+</html>
