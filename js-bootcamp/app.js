@@ -2088,3 +2088,389 @@ document.querySelector("body").addEventListener("click", () => {
 // setInterval(() => {
 //   console.log("Muhammad", Date.now());
 // }, 1000);
+
+/********************************** - End - **********************************/
+
+/* >>> API Request & V8 Engine  <<< */
+
+/*********************************************************************************
+ * XMLHttpRequest (XHR): XMLHttpRequest is a built-in browser API used to send HTTP/HTTPS requests to a server.
+ * It allows web pages to fetch or send data asynchronously without reloading the entire page.
+ * This is the foundation of AJAX (Asynchronous JavaScript and XML), though today JSON is more commonly used than XML.
+ *
+ * Why XHR Matters
+ * Before XHR, every server interaction required a full page refresh.
+ * XHR enables partial updates (e.g., updating a chat window, loading comments, submitting forms in the background).
+ * It improves performance and user experience by making apps faster and more interactive.
+ *
+ * How XHR Works Internally
+ * XHR follows an event-driven model.
+ * It inherits from: EventTarget → XMLHttpRequestEventTarget → XMLHttpRequest
+ * This means it supports event listeners like:
+ *   - load
+ *   - error
+ *   - progress
+ *   - readystatechange
+ * readyState Values: The readyState property represents the current state of the request:
+ * 0 → UNSENT            (Request not initialized)
+ * 1 → OPENED            (open() has been called)
+ * 2 → HEADERS_RECEIVED  (Response headers received)
+ * 3 → LOADING           (Response body is being received)
+ * 4 → DONE              (Request completed successfully or failed)
+ *
+ * Key Methods & Properties
+ * - open(method, url): Initializes the request
+ * - send(): Sends the request
+ * - setRequestHeader(): Sets HTTP headers
+ * - responseText / responseXML: Contains server response
+ * - status: HTTP status code (e.g., 200, 404)
+ *
+ *  Modern Alternative: fetch()
+ * - XHR is now largely replaced by the Fetch API
+ * - fetch() is promise-based and cleaner to use
+ * - Example: fetch(url).then(res => res.json()).then(data => console.log(data))
+ *
+ * console.log(): Not part of the ECMAScript (JavaScript) standard itself
+ * It is provided by the runtime environment (browser or Node.js)
+ * Used for debugging and logging output
+ * In browsers, it is part of the Web APIs (DevTools)
+ * In Node.js, it is implemented differently but serves the same purpose
+ *
+ * V8 Engine: V8 is a JavaScript engine developed by Google
+ * Written in C++
+ * Used in Chrome and Node.js
+ * It compiles JavaScript directly into machine code using Just-In-Time (JIT) compilation
+ * Handles memory management (garbage collection)
+ *
+ *  Node.js: Node.js is NOT just V8
+ * It is a runtime environment built on top of V8
+ * Adds system-level APIs (file system, networking, etc.)
+ * Uses libraries like libuv for asynchronous I/O operations
+ * Allows JavaScript to run outside the browser
+ *
+ * JavaScript Engine vs Runtime:
+ * Engine (e.g., V8): Executes JavaScript code
+ * Runtime (e.g., Browser, Node.js): Provides APIs like:
+ * DOM (browser),  File system (Node.js),  Timers (setTimeout, etc.)
+ *
+ * Event Loop (Important Missing Concept)
+ * JavaScript is single-threaded
+ * Uses an event loop to handle asynchronous operations
+ * Tasks are queued and executed when the call stack is empty
+ *
+ *************************************************************************/
+
+/*
+const requestURL = "https://api.github.com/users/muhammad-rizwan-wp";
+const xhr = new XMLHttpRequest();
+xhr.open("GET", requestURL);
+xhr.onreadystatechange = () => {
+  if (xhr.readyState === 4) {
+    const data = JSON.parse(xhr.responseText);
+    console.log(data);
+  }
+};
+xhr.send();
+*/
+
+/********************************** - End - **********************************/
+
+/* >>> Promise  <<< */
+
+/**********************************************************
+ * A Promise is an object that represents the eventual result of an asynchronous operation.
+ * It acts as a placeholder for a value that may not be available yet but will be resolved in the future.
+ * It helps avoid deeply nested callbacks (callback hell) and makes async code more readable.
+ * 
+ * Why Needed:
+ * JavaScript is single-threaded but handles async tasks (API calls, timers, file operations).
+ * Promises allow better control over async flow and error handling.
+ * 
+ * States: Promise can be in one of three states:
+ * pending: Initial state — the operation is still in progress.
+ * fulfilled (resolved): The operation completed successfully. The promise now has a resulting value.
+ * rejected: The operation failed. The promise has a reason (error).
+ * 
+ * NOTE: Once a promise is fulfilled or rejected, it becomes "settled" and cannot change again.
+ * 
+ * Creating a Promise: A Promise is created using the Promise constructor:
+ * const myPromise = new Promise((resolve, reject) => {
+ *     let success = true;
+ * 
+ *     if (success) {
+ *         resolve("Operation successful");
+ *     } else {
+ *         reject("Operation failed");
+ *     }
+ * });
+ * 
+ * resolve(value): marks the promise as fulfilled
+ * reject(error): marks the promise as rejected
+ * 
+ * Consuming:
+ * .then(): Used to handle the fulfilled (resolved) value. Can be chained for sequential operations
+ * .catch(): Handles errors (rejections). Works like a try-catch for async code
+ * .finally(): Executes after the promise is settled (either fulfilled or rejected). Used for cleanup (e.g., hiding loaders)
+ * 
+ * Example:
+ * myPromise
+ *   .then(result => {
+ *       console.log(result);
+ *   })
+ *   .catch(error => {
+ *       console.log(error);
+ *   })
+ *   .finally(() => {
+ *       console.log("Done");
+ *   });
+ *  Promise Chaining: Each .then() returns a new Promise. Allows sequential async operations
+ * fetchData()
+ *   .then(data => processData(data))
+ *   .then(result => saveData(result))
+ *   .catch(err => console.error(err));
+ * 
+ * Error Propagation: Errors automatically propagate down the chain. One .catch() can handle errors from all previous steps
+ * 
+ * Promise vs Callback:
+ * Promises improve readability
+ * Better error handling
+ * Avoid nested callbacks
+ * 
+ * Async/Await (Modern Syntax):
+ * Built on top of Promises
+ * Makes async code look synchronous
+ * 
+ * async function getData() {
+ *     try {
+ *         let response = await fetch(url);
+ *         let data = await response.json();
+ *         console.log(data);
+ *     } catch (error) {
+ *         console.log(error);
+ *     }
+ * }
+ * 
+ * Important Notes
+ * Promises execute immediately when created
+ * They are not lazy
+ * They can only resolve/reject once
+ * Returning a value in .then() passes it to the next .then()
+ * 
+ **********************************************************/
+
+// Creation
+// const promiseOne = new Promise((resolve, reject) => {
+//   // Async Calls
+//   // DB Calls, cryptography, newtwork
+
+//   setTimeout(() => {
+//     console.log("Async task completed");
+//     resolve();
+//   }, 1000);
+// });
+
+// promiseOne.then(() => {
+//   console.log("Promise consumed");
+// });
+
+// new Promise((resolve, reject) => {
+//   setTimeout(() => {
+//     console.log("Async Task 2");
+//     resolve();
+//   }, 1000);
+// }).then(() => {
+//   console.log("Async 2 COMSUMED");
+// });
+
+// const promise3 = new Promise((resolve, reject) => {
+//   setTimeout(() => {
+//     resolve({
+//       username: "Muhammad",
+//       email: "muhammad@user.com",
+//     });
+//   }, 1000);
+// });
+
+// promise3.then((user) => {
+//   console.log(user);
+// });
+
+/*
+
+const promise4 = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    let error = true;
+    if (!error) {
+      resolve({
+        username: "Muhammad",
+        email: "muhammad@user.com",
+      });
+    } else {
+      reject("Error: Something went wrong");
+    }
+  }, 1000);
+});
+
+promise4
+  .then((user) => {
+    console.log(user);
+    return user.username;
+  })
+  .then((username) => {
+    console.log(username);
+  })
+  .catch((err) => {
+    console.log(err);
+  })
+  .finally(() => console.log("Operation have been completed or rejected"));
+*/
+
+/*
+const promise5 = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    let error = true;
+    if (!error) {
+      resolve({
+        username: "Muhammad",
+        email: "muhammad@user.com",
+      });
+    } else {
+      reject("Error: Something went wrong ❌");
+    }
+  }, 1000);
+});
+
+async function consumePromise() {
+  try {
+    const respose = await promise5;
+    console.log(respose);
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+consumePromise();
+*/
+
+async function getAllUsers() {
+  // try {
+  //   const res = await fetch(`https://jsonplaceholder.typicode.com/users`);
+  //   const data = await res.json();
+  //   console.log(data);
+  // } catch (error) {
+  //   console.log(`Error: ${error}`);
+  // }
+
+  await fetch(`https://jsonplaceholder.typicode.com/users`)
+    .then((res) => {
+      return res.json();
+    })
+    .then((data) => {
+      console.log(data);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+}
+
+// getAllUsers();
+/********************************** - End - **********************************/
+
+/* >>> Fetch  <<< */
+
+/**********************************************************
+ * The Fetch API is a modern, promise-based way to make HTTP requests in JavaScript. It replaces older approaches like XMLHttpRequest (XHR) and provides a cleaner, more flexible interface for handling network requests.
+ *
+ * WHY FETCH?
+ * - Earlier, APIs were commonly handled using XMLHttpRequest (XHR), which was complex and often led to "callback hell".
+ * - Fetch simplifies async operations using Promises.
+ * - Works seamlessly with async/await for even cleaner code.
+ * 
+ * CONCEPT:
+ * - fetch() is a global method available in browsers (and Node.js with support).
+ * - It starts a network request and returns a Promise.
+ * - That Promise resolves to a Response object representing the server response.
+ *
+ * Example:
+ * fetch(url)
+ *   .then(response => { ... })
+ *   .catch(error => { ... });
+ *
+ * BEHAVIOR:
+ * 
+ * 1. Promise Resolution:
+ *    - fetch() ONLY rejects on network errors
+ *      (e.g., no internet, DNS failure).
+ *    - It does NOT reject on HTTP errors like: 404 (Not Found),  500 (Server Error)
+ *
+ * 2. Handling HTTP Errors:
+ *    - You MUST manually check:
+ *        response.ok        // true for status 200–299
+ *        response.status    // actual status code
+ *
+ *    Example:
+ *    fetch(url)
+ *      .then(response => {
+ *        if (!response.ok) {
+ *          throw new Error(`HTTP error! Status: ${response.status}`);
+ *        }
+ *        return response.json();
+ *      })
+ *
+ * RESPONSE OBJECT METHODS:
+ * The Response object provides methods to read data:
+ * - response.json()   → parses JSON data (most common)
+ * - response.text()   → returns plain text
+ * - response.blob()   → binary large object (files/images)
+ * - response.formData() → form data
+ *
+ * NOTE: These methods also return Promises.
+ *
+ * ASYNC/AWAIT VERSION (MODERN STYLE):
+ * async function getData() {
+ *   try {
+ *     const response = await fetch(url);
+ *     if (!response.ok) {
+ *       throw new Error(`HTTP error! Status: ${response.status}`);
+ *     }
+ *     const data = await response.json();
+ *     console.log(data);
+ *   } catch (error) {
+ *     console.error("Fetch error:", error);
+ *   }
+ * }
+ *
+ * CUSTOM REQUEST OPTIONS:
+ * fetch(url, {
+ *   method: "GET",        // GET, POST, PUT, DELETE, etc.
+ *   headers: {
+ *     "Content-Type": "application/json"
+ *   },
+ *   body: JSON.stringify(data), // for POST/PUT
+ *   credentials: "include",     // for cookies/auth
+ * })
+ *
+ * COMMON USE CASES:
+ * - Fetching API data (REST APIs)
+ * - Sending form data to a server
+ * - Uploading/downloading files
+ * - Authentication requests
+ *
+ * ADVANTAGES:
+ * - Cleaner syntax (Promises & async/await)
+ * - More powerful and flexible than XHR
+ * - Better error handling patterns
+ * - Stream-based response handling
+ * 
+ * LIMITATIONS:
+ * - Does NOT reject on HTTP errors automatically
+ * - No built-in timeout (must implement manually)
+ * - Requires polyfill for older browsers
+ * 
+ * SUMMARY:
+ * Fetch is the standard modern way to handle network
+ * requests in JavaScript. It is promise-based,
+ * easy to read, and integrates well with async/await,
+ * but requires manual handling of HTTP errors.
+ *
+ **********************************************************/
