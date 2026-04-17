@@ -1745,7 +1745,7 @@ console.log(totalCount);
  *
  ******************************************************************** */
 
-const titleH1 = document.getElementById("title");
+// const titleH1 = document.getElementById("title");
 // console.log(
 //   `ID: ${titleH1.id}, Class: ${titleH1.className}, Attributes: ${titleH1.getAttribute("id")} Content: ${titleH1.textContent}`,
 // );
@@ -1782,29 +1782,29 @@ const titleH1 = document.getElementById("title");
  *
  ******************************************************************** */
 
-const container = document.querySelector(".week_days");
-const dayOne = document.querySelector(".day");
+// const container = document.querySelector(".week_days");
+// const dayOne = document.querySelector(".day");
 
 // console.log(container.children[0].innerHTML);
 
 // console.log(container.firstElementChild);
 // console.log(container.lastElementChild);
 
-for (let i = 0; i < container.children.length; i++) {
-  // console.log(`${container.children[i].innerHTML} at index ${i}`);
-}
+// for (let i = 0; i < container.children.length; i++) {
+//   // console.log(`${container.children[i].innerHTML} at index ${i}`);
+// }
 
 // console.log(dayOne.parentElement);
 // console.log(dayOne.nextElementSibling);
 
-const createDiv = document.createElement("div");
-createDiv.id = "el-dom";
-createDiv.className = "dom__el";
-createDiv.setAttribute("title", "Generated Element by Dom");
-createDiv.style.color = "green";
-createDiv.style.padding = "12px";
+// const createDiv = document.createElement("div");
+// createDiv.id = "el-dom";
+// createDiv.className = "dom__el";
+// createDiv.setAttribute("title", "Generated Element by Dom");
+// createDiv.style.color = "green";
+// createDiv.style.padding = "12px";
 
-const divContent = document.createTextNode("Muhammad Rizwan");
+// const divContent = document.createTextNode("Muhammad Rizwan");
 // createDiv.appendChild(divContent);
 // document.body.appendChild(createDiv);
 
@@ -1836,32 +1836,33 @@ const divContent = document.createTextNode("Muhammad Rizwan");
  ******************************************************************** */
 
 /* NonOptimized way*/
+
 function addWeekDay(weekDay) {
-  const createItem = document.createElement("div");
-  createItem.innerHTML = `${weekDay}`;
-  document.querySelector(".week_days").appendChild(createItem);
+  // const createItem = document.createElement("div");
+  // createItem.innerHTML = `${weekDay}`;
+  // document.querySelector(".week_days").appendChild(createItem);
 }
 // addWeekDay("Friday");
 // addWeekDay("Saturday");
 
 /* Optimized way*/
 function addWeekDayOptimized(weekDay) {
-  const createItem = document.createElement("div");
-  createItem.appendChild(document.createTextNode(weekDay));
-  document.querySelector(".week_days").appendChild(createItem);
+  // const createItem = document.createElement("div");
+  // createItem.appendChild(document.createTextNode(weekDay));
+  // document.querySelector(".week_days").appendChild(createItem);
 }
 // addWeekDayOptimized("Friday");
 // addWeekDayOptimized("Saturday");
 
 // Edit
-const editText = document.querySelector(".week_days div:nth-child(2)");
-const updateDay = document.createElement("div");
-updateDay.textContent = "TUESDAY";
-editText.replaceWith(updateDay);
+// const editText = document.querySelector(".week_days div:nth-child(2)");
+// const updateDay = document.createElement("div");
+// updateDay.textContent = "TUESDAY";
+// editText.replaceWith(updateDay);
 
 // Remove
-const deleteLastItem = document.querySelector(".week_days div:last-child");
-deleteLastItem.remove();
+// const deleteLastItem = document.querySelector(".week_days div:last-child");
+// deleteLastItem.remove();
 
 /********************************** - End - **********************************/
 
@@ -2181,37 +2182,37 @@ xhr.send();
  * A Promise is an object that represents the eventual result of an asynchronous operation.
  * It acts as a placeholder for a value that may not be available yet but will be resolved in the future.
  * It helps avoid deeply nested callbacks (callback hell) and makes async code more readable.
- * 
+ *
  * Why Needed:
  * JavaScript is single-threaded but handles async tasks (API calls, timers, file operations).
  * Promises allow better control over async flow and error handling.
- * 
+ *
  * States: Promise can be in one of three states:
  * pending: Initial state — the operation is still in progress.
  * fulfilled (resolved): The operation completed successfully. The promise now has a resulting value.
  * rejected: The operation failed. The promise has a reason (error).
- * 
+ *
  * NOTE: Once a promise is fulfilled or rejected, it becomes "settled" and cannot change again.
- * 
+ *
  * Creating a Promise: A Promise is created using the Promise constructor:
  * const myPromise = new Promise((resolve, reject) => {
  *     let success = true;
- * 
+ *
  *     if (success) {
  *         resolve("Operation successful");
  *     } else {
  *         reject("Operation failed");
  *     }
  * });
- * 
+ *
  * resolve(value): marks the promise as fulfilled
  * reject(error): marks the promise as rejected
- * 
+ *
  * Consuming:
  * .then(): Used to handle the fulfilled (resolved) value. Can be chained for sequential operations
  * .catch(): Handles errors (rejections). Works like a try-catch for async code
  * .finally(): Executes after the promise is settled (either fulfilled or rejected). Used for cleanup (e.g., hiding loaders)
- * 
+ *
  * Example:
  * myPromise
  *   .then(result => {
@@ -2228,18 +2229,18 @@ xhr.send();
  *   .then(data => processData(data))
  *   .then(result => saveData(result))
  *   .catch(err => console.error(err));
- * 
+ *
  * Error Propagation: Errors automatically propagate down the chain. One .catch() can handle errors from all previous steps
- * 
+ *
  * Promise vs Callback:
  * Promises improve readability
  * Better error handling
  * Avoid nested callbacks
- * 
+ *
  * Async/Await (Modern Syntax):
  * Built on top of Promises
  * Makes async code look synchronous
- * 
+ *
  * async function getData() {
  *     try {
  *         let response = await fetch(url);
@@ -2249,13 +2250,13 @@ xhr.send();
  *         console.log(error);
  *     }
  * }
- * 
+ *
  * Important Notes
  * Promises execute immediately when created
  * They are not lazy
  * They can only resolve/reject once
  * Returning a value in .then() passes it to the next .then()
- * 
+ *
  **********************************************************/
 
 // Creation
@@ -2385,7 +2386,7 @@ async function getAllUsers() {
  * - Earlier, APIs were commonly handled using XMLHttpRequest (XHR), which was complex and often led to "callback hell".
  * - Fetch simplifies async operations using Promises.
  * - Works seamlessly with async/await for even cleaner code.
- * 
+ *
  * CONCEPT:
  * - fetch() is a global method available in browsers (and Node.js with support).
  * - It starts a network request and returns a Promise.
@@ -2397,7 +2398,7 @@ async function getAllUsers() {
  *   .catch(error => { ... });
  *
  * BEHAVIOR:
- * 
+ *
  * 1. Promise Resolution:
  *    - fetch() ONLY rejects on network errors
  *      (e.g., no internet, DNS failure).
@@ -2461,12 +2462,12 @@ async function getAllUsers() {
  * - More powerful and flexible than XHR
  * - Better error handling patterns
  * - Stream-based response handling
- * 
+ *
  * LIMITATIONS:
  * - Does NOT reject on HTTP errors automatically
  * - No built-in timeout (must implement manually)
  * - Requires polyfill for older browsers
- * 
+ *
  * SUMMARY:
  * Fetch is the standard modern way to handle network
  * requests in JavaScript. It is promise-based,
@@ -2474,3 +2475,296 @@ async function getAllUsers() {
  * but requires manual handling of HTTP errors.
  *
  **********************************************************/
+
+/********************************** - End - **********************************/
+
+/* >>> Object Oriented  <<< */
+
+/**********************************************************
+ * Object-Oriented Programming (OOP) is a programming paradigm (style/approach) used to structure and organize code using objects and classes.
+ * It helps make code: Modular (divided into parts), Reusable, Maintainable, Scalable
+ *
+ * OBJECT: An Object is a collection of: Properties (variables / data) & Methods (functions / behavior)
+ * Example:
+ * const user = {
+ *   name: "Ali",
+ *   age: 22,
+ *   greet() {
+ *     console.log("Hello");
+ *   }
+ * };
+ *
+ * MAIN PARTS OF OOP IN JS:
+ * 1) Constructor Function:
+ *    - A function used to create multiple objects
+ *    - By convention, starts with a capital letter
+ *    function User(name) {
+ *      this.name = name;
+ *    }
+ * 2) Prototypes:
+ *    - JavaScript is prototype-based (NOT class-based internally)
+ *    - Every object has a hidden [[Prototype]]
+ *    - Used for inheritance and shared methods
+ *    User.prototype.sayHi = function () {
+ *      console.log("Hi " + this.name);
+ *    };
+ * 3) Classes (ES6):
+ *    - Introduced in ES6 (2015)
+ *    - Syntactic sugar over prototype-based system
+ *    - Makes code cleaner and easier to understand
+ *
+ *    class User {
+ *      constructor(name) {
+ *        this.name = name;
+ *      }
+ *      sayHi() {
+ *        console.log("Hi " + this.name);
+ *      }
+ *    }
+ *
+ * 4) Instances:
+ *    - Objects created from a constructor or class
+ *    const u1 = new User("Ali");
+ *
+ * "new" KEYWORD:
+ *  - Creates an empty object {}
+ *  - Sets the prototype of the object
+ *  - Binds "this" to the new object
+ *  - Returns the object automatically
+ *
+ * "this" KEYWORD:
+ * - Refers to the current object
+ * - Inside constructor/class → refers to new instance
+ * - Value depends on how a function is called
+ *
+ * 4 PILLARS OF OOP:
+ * 1) ABSTRACTION:
+ *    - Hiding complex implementation details
+ *    - Showing only essential features
+ *    Example:
+ *    You use a car without knowing engine internals.
+ *
+ * 2) ENCAPSULATION:
+ *    - Wrapping data + methods together
+ *    - Restricting direct access to some data
+ *
+ *    Example:
+ *    class Bank {
+ *      #balance = 0; // private field
+ *
+ *      deposit(amount) {
+ *        this.#balance += amount;
+ *      }
+ *    }
+ *
+ * 3) INHERITANCE:
+ *    - One class can inherit properties/methods from another
+ *    class Animal {
+ *      speak() {
+ *        console.log("Animal sound");
+ *      }
+ *    }
+ *    class Dog extends Animal {
+ *      bark() {
+ *        console.log("Woof!");
+ *      }
+ *    }
+ *
+ * 4) POLYMORPHISM:
+ *    - Same method name behaves differently
+ *    class Animal {
+ *      speak() {
+ *        console.log("Animal sound");
+ *      }
+ *    }
+ *    class Dog extends Animal {
+ *      speak() {
+ *        console.log("Woof!");
+ *      }
+ *    }
+ *
+ * NOTES:
+ * - JavaScript is primarily prototype-based
+ * - Classes are just syntactic sugar over prototypes
+ * - Functions in JS can act as constructors
+ * - Objects inherit from other objects
+ *
+ **********************************************************/
+
+// const User = {
+//   username: "Muhammad",
+//   loginCount: 8,
+//   signedIn: true,
+
+//   getUserDetails: function () {
+//     console.log("User details has been fetched from database.");
+//   },
+// };
+
+function UserDetails(uname, loginCount, isLoggedIn) {
+  this.uname = uname;
+  this.loginCount = loginCount;
+  this.isLoggedIn = isLoggedIn;
+
+  return this;
+}
+
+// const userO = UserDetails("Muhammad", 10, false);
+// const userO2 = UserDetails("Muhammad Abu Bakr", 10, true); // It will override the userO. It bad way.
+// const userO3 = new UserDetails("Zinn Noorain", 8, false); // Solution: use the constructor function which alway create new object.
+// console.log(userO, userO3);
+
+/********************************** - End - **********************************/
+
+/* >>> Prototype & New Keyword <<< */
+
+/**********************************************************
+ * JavaScript is a prototype-based language. This means objects can inherit properties and methods from other objects through something called a "prototype".
+ * Every JavaScript object has an internal hidden property:    [[Prototype]]
+ * which links it to another object.
+ * This mechanism is called:    → Prototypal Inheritance
+ *
+ * IDEA: When you try to access a property/method on an object:
+ * - JS first looks inside the object itself
+ * - If not found, it looks in its prototype
+ * - This continues up the "prototype chain"
+ *
+ * BUILT-IN PROTOTYPES: JavaScript provides default prototypes for built-in types:
+ * - Array   → Array.prototype
+ * - String  → String.prototype
+ * - Object  → Object.prototype
+ * Example: const arr = [1, 2, 3]; arr.push(4);  // push() comes from Array.prototype
+ *
+ * FUNCTIONS & PROTOTYPE
+ * --------------------------------------------------------
+ * In JavaScript: Functions are also objects. Every function has a special property:      functionName.prototype
+ * This is used when creating objects with "new"
+ *
+ * CONSTRUCTOR FUNCTION + PROTOTYPE:
+ * function User(name) {
+ *   this.name = name;
+ * }
+ *
+ * // Adding method via prototype
+ * User.prototype.sayHi = function () {
+ *   console.log("Hi " + this.name);
+ * };
+ * const u1 = new User("Ali");
+ * u1.sayHi(); // works via prototype
+ *
+ * WHY USE PROTOTYPE: Methods defined on prototype are SHARED
+ * - Saves memory (instead of duplicating methods per object)
+ * Bad (memory inefficient):
+ * function User(name) {
+ *   this.name = name;
+ *   this.sayHi = function () {}; // new copy per object ❌
+ * }
+ * Good (efficient):
+ * User.prototype.sayHi = function () {}; // shared ✅
+ *
+ * "new" KEYWORD & PROTOTYPE LINK:
+ * Here's what happens behind the scenes when the new keyword is used:
+ * A new object is created: The new keyword initiates the creation of a new JavaScript object.
+ * A prototype is linked: The newly created object gets linked to the prototype property of the constructor function. This means that it has access to properties and methods defined on the constructor's prototype.
+ * The constructor is called: The constructor function is called with the specified arguments and this is bound to the newly created object. If no explicit return value is specified from the constructor, JavaScript assumes this, the newly created object, to be the intended return value.
+ * The new object is returned: After the constructor function has been called, if it doesn't return a non-primitive value (object, array, function, etc.), the newly created object is returned.
+ *
+ * PROTOTYPE CHAIN
+ * Example chain:
+ * obj → User.prototype → Object.prototype → null
+ * This chain is used for property lookup.
+ *
+ * NOTES:
+ * - JavaScript is NOT class-based internally
+ * - It works using prototypes behind the scenes
+ * - Classes (ES6) are just syntactic sugar over prototypes
+ * - All objects inherit from Object.prototype (by default)
+ *
+ **********************************************************/
+
+function multipleBy5(num) {
+  return num * 5;
+}
+
+// multipleBy5.power = 5;
+// console.log(multipleBy5(5));
+// console.log(multipleBy5.power);
+// console.log(multipleBy5.prototype);
+
+function player(playername, score) {
+  this.playername = playername;
+  this.score = score;
+}
+
+player.prototype.increase = function () {
+  this.score++;
+  console.log(this.score);
+};
+
+// const p1 = new player("Muhammad Abu Bakr", 25);
+// const p2 = player("Muhammad Umar", 50);
+
+// p1.increase();
+
+let heros = ["Thor", "Spiderman"];
+
+let heroPower = {
+  thor: "Hammer",
+  spiderMan: "Sling",
+
+  getSpiderPower: function () {
+    console.log(`Spidy power is ${this.spiderMan}`);
+  },
+};
+
+Object.prototype.greeting = function () {
+  console.log(`Hey, dude i'm available here 😎`);
+};
+
+// heroPower.greeting(); // Object Level. It for all String, Array & Object
+// heros.greeting();  // Object Level
+
+Array.prototype.arrayGreeting = function () {
+  console.log(`Hey, dude i'm array greeting. 😎`);
+};
+
+// heros.arrayGreeting(); // It only for Array Object Level
+
+/* >>> Inheritance <<< */
+
+const User = {
+  name: "username",
+  email: "user@email.com",
+};
+
+const Teacher = {
+  makeVideo: false,
+};
+
+const TeachingSupport = {
+  isAvailable: false,
+};
+
+const TASupport = {
+  makeAssigment: "JS Assignment",
+  fullTime: true,
+  // __proto__: TeachingSupport, // Old Approch 1
+};
+
+//Teacher.__proto__ = User; // Old Approch 2
+
+// Modern Approch
+// Object.setPrototypeOf(TeachingSupport, Teacher);
+
+// Custom Property Created in String
+
+/*
+let username = "Muhammad             ";
+
+String.prototype.trueLength = function () {
+  console.log(`True length of string is: ${this.trim().length}`);
+};
+
+username.trueLength();
+
+ */
