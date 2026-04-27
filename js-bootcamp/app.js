@@ -2768,3 +2768,249 @@ String.prototype.trueLength = function () {
 username.trueLength();
 
  */
+
+/********************************** - End - **********************************/
+
+/* >>> Call & This Keyword  <<< */
+
+/**********************************************************
+ * 1. JavaScript executes code inside an Execution Context.
+ * - The first one is Global Execution Context (GEC).
+ * 2. Value of `this` depends on how a function is called (not where it is defined).
+ * 3. Global Context:
+ * - In browser: `this` refers to Window object.
+ * - In Node.js: `this` refers to an empty object {}.
+ * 4. Nested Functions:
+ * - Inner functions do NOT automatically inherit `this` from outer functions.
+ * - Default behavior: - Non-strict mode → `this` = global object (window)
+ * - Strict mode → `this` = undefined
+ * 5. Function Reference Issue:
+ * - When passing or calling a function inside another function, it may lose its original `this` context.
+ * 6. call() Method: Used to explicitly set the value of `this`.
+ * Syntax: functionName.call(thisArg, arg1, arg2, ...)
+ * - thisArg → object to be used as `this`
+ * - Remaining arguments → passed to the function
+ * 7. Key Use Case:
+ *    - To make inner function use outer function's `this`, we pass outer `this` using call().
+ *
+ * 8. Example:
+ *    function outer() { console.log(this);
+ *       function inner() { console.log(this);     }
+ *  inner();           // global / undefined
+ *  inner.call(this);  // same as outer's `this` }
+ *  outer();
+ *
+ * 9. Important Notes:
+ * - call() invokes the function immediately.
+ * - You must pass arguments after `this` if required.
+ * - Helps control execution context manually.
+ *
+ **********************************************************/
+
+function setUsername(username) {
+  this.username = username;
+}
+
+function createUser(username, email, password) {
+  setUsername.call(this, username);
+
+  this.email = email;
+  this.password = password;
+}
+
+// const u1 = new createUser("Muhammad", "muhammad@users.com", "12345");
+// console.log(u1);
+
+/********************************** - End - **********************************/
+
+/* >>> Class constructor & Static  <<< */
+
+/**********************************************************
+ * JavaScript Classes:
+ * - Classes were introduced in ES6 (ECMAScript 2015).
+ * - They are syntactic sugar over JavaScript’s prototype-based inheritance.
+ * - JavaScript is fundamentally object-based, not class-based.
+ *
+ * Class Structure:
+ * - A class can contain: Properties (variables), Methods (functions)
+ *
+ * Constructor: A special method inside a class.
+ * - Automatically called when a new object (instance) is created.
+ * - Used to initialize object properties.
+ * Example:
+ * class Person { constructor(name) { this.name = name;  } }
+ *
+ * Creating Object (Instance):  Use the `new` keyword to create an instance.
+ * The constructor runs automatically.
+ * const p1 = new Person("Ali");
+ *
+ * Inheritance: One class can inherit from another using `extends`.
+ * class Student extends Person {}
+ *
+ * super() Keyword: Used inside a child class constructor.
+ * - Calls the parent class constructor.
+ * - Required before using `this` in a child constructor.
+ *
+ * Example:
+ * class Student extends Person { constructor(name, grade) { super(name); // calls Person constructor
+ *      this.grade = grade;   }  }
+ *
+ * Static Keyword:
+ * - Used to define methods or properties that belong to the class itself, not to instances of the class.
+ *
+ * Example: class MathUtils { static add(a, b) {  return a + b;  } }
+ * MathUtils.add(2, 3); // ✅ valid
+ * // new MathUtils().add(2, 3); ❌ invalid
+ *
+ * Important Correction:
+ * - Static members are NOT accessible by instances.
+ * - Static members are also NOT inherited in the same way as instance methods.
+ * - They are accessed directly using the class name.
+ *
+ **********************************************************/
+
+class UserC {
+  constructor(username, email, password) {
+    this.username = username;
+    this.email = email;
+    this.password = password;
+  }
+
+  encriptPassword() {
+    return `${this.password}abc`;
+  }
+}
+
+// const m = new UserC("Muhammad Abu Bakr", "m.abu_bakr@user.com", "M@AB_1");
+
+// console.log(m.encriptPassword());
+
+class X {
+  constructor(username) {
+    this.username = username;
+  }
+  logMe() {
+    console.log(`USERNAME is ${this.username}`);
+  }
+}
+
+class Y extends X {
+  constructor(username, email, password) {
+    super(username);
+    this.email = email;
+    this.password = password;
+  }
+
+  displayInfo() {
+    console.log(`Name: ${this.username}, Email: ${this.email}`);
+  }
+}
+
+// const nm = new Y("Muhammad Ali", "muhammad_ali@user.com", "1234586");
+// nm.displayInfo();
+
+class UserX {
+  constructor(username) {
+    this.username = username;
+  }
+  logMe() {
+    console.log(`USERNAME is ${this.username}`);
+  }
+
+  static createId() {
+    return "123";
+  }
+}
+
+/********************************** - End - **********************************/
+
+/* >>> Bind  <<< */
+
+/**********************************************************
+ * bind():
+ * - bind() is a method available on all JavaScript functions.
+ * - It is used to create a NEW function where the value of `this` is permanently set (bound) to a specific object.
+ * - It does NOT call the function immediately.
+ *
+ * Need:
+ * - In JavaScript, `this` depends on how a function is called.
+ * - When a function is passed as a callback, it often loses its original `this`.
+ * - bind() helps us fix (lock) the correct `this` value.
+ *
+ * Syntax:
+ * functionName.bind(thisArg, arg1, arg2, ...)
+ * - thisArg → the object you want `this` to refer to arg1, arg2... → optional arguments (pre-filled values)
+ *
+ * Works:
+ * It returns a new function.
+ * That new function remembers: (a) what `this` should be  (b) any preset arguments
+ * You must call that returned function manually.
+ *
+ * Basic Example:
+ * const user = {     name: "Ali"   };
+ * function showName() {     console.log(this.name);   }
+ * const newFunc = showName.bind(user);
+ * newFunc(); // Output: "Ali"
+ *
+ * Explanation:   - bind(user) creates a new function
+ * `this` inside showName is now always `user`
+ *
+ * Problem Without bind():
+ * const user = {     name: "Ali",     greet: function () {       console.log(this.name);     }   };
+ * const fn = user.greet;
+ * fn(); // undefined (or error in strict mode)
+ *
+ * Explanation:  Function is called without object → `this` is lost
+ *
+ * Fix Using bind():
+ * const fn2 = user.greet.bind(user);
+ * fn2(); // "Ali"
+ *
+ * Partial Application (Pre-setting Arguments):
+ * function multiply(a, b) {  return a * b;    }
+ * const double = multiply.bind(null, 2);
+ * double(5); // 10
+ *
+ * Explanation: First argument (a = 2) is fixed. Second argument (b) is passed later.
+ *
+ * Using bind() with setTimeout (Common Interview Case):
+ * const person = { name: "Sara", speak: function () { console.log(this.name); } };
+ * setTimeout(person.speak, 1000);  // undefined (this is lost)
+ * setTimeout(person.speak.bind(person), 1000);  // "Sara"
+ *
+ * bind() vs call() vs apply():
+ * call(): Calls function immediately
+ * Arguments passed individually
+ *
+ * apply():
+ * Calls function immediately
+ * Arguments passed as array
+ *
+ * bind(): → Does NOT call immediately
+ * Returns a new function
+ *
+ * Important Points:
+ * bind() does NOT modify the original function
+ * It always returns a NEW function
+ * Once `this` is bound, it cannot be changed
+ * Very useful in: → Event handlers,  → Callbacks, → Timers (setTimeout, setInterval)
+ *
+ **********************************************************/
+
+class ReactExample {
+  constructor() {
+    this.library = "React";
+    this.server = "https://localhost:3000";
+
+    document
+      .querySelector("body")
+      .addEventListener("click", this.handleClick.bind(this));
+  }
+
+  handleClick() {
+    console.log(`Button Clicked`);
+    console.log(this);
+  }
+}
+
+const app = new ReactExample();
